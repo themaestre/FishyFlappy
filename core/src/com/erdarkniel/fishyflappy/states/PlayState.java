@@ -1,4 +1,4 @@
-package com.erdarkniel.flappybird.states;
+package com.erdarkniel.fishyflappy.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.erdarkniel.flappybird.FlappyBird;
-import com.erdarkniel.flappybird.sprites.Bird;
-import com.erdarkniel.flappybird.sprites.Tube;
+import com.erdarkniel.fishyflappy.FishyFlappy;
+import com.erdarkniel.fishyflappy.sprites.Bird;
+import com.erdarkniel.fishyflappy.sprites.Tube;
 
 public class PlayState extends State{
     private static final int TUBE_SPACING = 125;
@@ -18,12 +18,14 @@ public class PlayState extends State{
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
     private  Array<Tube> tubes;
+    //Puntuacion
+    int score = 0;
     //Musica del juego
     private Music music;
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
         bird = new Bird(50,320);
-        camera.setToOrtho(false, FlappyBird.WIDTH/2,FlappyBird.HEIGHT/2);
+        camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(camera.position.x - camera.viewportWidth/2,GROUND_Y_OFFSET);

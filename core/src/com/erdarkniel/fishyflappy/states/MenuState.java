@@ -1,20 +1,21 @@
-package com.erdarkniel.flappybird.states;
+package com.erdarkniel.fishyflappy.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.erdarkniel.flappybird.FlappyBird;
+import com.erdarkniel.fishyflappy.FishyFlappy;
 public class MenuState extends State{
     private Texture bg;
     private Texture playBtn;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
-        camera.setToOrtho(false, FlappyBird.WIDTH/2,FlappyBird.HEIGHT/2);
+        camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
         playBtn = new Texture("playbtn.png");
     }
     @Override
     public void handleInput() {
+
         //Toque de entrada
         if (Gdx.input.justTouched()){
             gsm.set(new PlayState(gsm));

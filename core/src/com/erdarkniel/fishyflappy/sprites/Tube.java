@@ -1,4 +1,4 @@
-package com.erdarkniel.flappybird.sprites;
+package com.erdarkniel.fishyflappy.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;

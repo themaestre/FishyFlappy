@@ -1,4 +1,4 @@
-package com.erdarkniel.flappybird.sprites;
+package com.erdarkniel.fishyflappy.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

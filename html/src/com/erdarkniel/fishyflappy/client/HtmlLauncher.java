@@ -1,9 +1,9 @@
-package com.erdarkniel.flappybird.client;
+package com.erdarkniel.fishyflappy.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.erdarkniel.flappybird.FlappyBird;
+import com.erdarkniel.fishyflappy.FishyFlappy;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -17,6 +17,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener createApplicationListener () {
-                return new FlappyBird();
+                return new FishyFlappy();
         }
 }

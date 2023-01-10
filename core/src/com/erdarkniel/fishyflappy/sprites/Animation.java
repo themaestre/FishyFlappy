@@ -1,4 +1,4 @@
-package com.erdarkniel.flappybird.sprites;
+package com.erdarkniel.fishyflappy.sprites;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;

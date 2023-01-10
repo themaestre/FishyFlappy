@@ -1,4 +1,4 @@
-package com.erdarkniel.flappybird.states;
+package com.erdarkniel.fishyflappy.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

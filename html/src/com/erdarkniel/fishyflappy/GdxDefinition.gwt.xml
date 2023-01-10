@@ -5,7 +5,7 @@
 	<inherits name='com.badlogic.gdx.physics.box2d.box2d-gwt' />
 
 	<inherits name='FlappyBird' />
-	<entry-point class='com.erdarkniel.flappybird.client.HtmlLauncher' />
+	<entry-point class='com.erdarkniel.fishyflappy.client.HtmlLauncher' />
 	<set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/>
 	<set-configuration-property name="gdx.assetpath" value="../assets" />
 	<set-property name="user.agent" value="gecko1_8, safari"/>

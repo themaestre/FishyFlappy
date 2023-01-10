@@ -1,14 +1,13 @@
-package com.erdarkniel.flappybird;
+package com.erdarkniel.fishyflappy;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.erdarkniel.flappybird.states.GameStateManager;
-import com.erdarkniel.flappybird.states.MenuState;
+import com.erdarkniel.fishyflappy.states.GameStateManager;
+import com.erdarkniel.fishyflappy.states.MenuState;
 
-public class FlappyBird extends ApplicationAdapter {
+public class FishyFlappy extends ApplicationAdapter {
 	//TAMALLO PANTALLA
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 720;
