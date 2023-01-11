@@ -4,7 +4,7 @@ sourceCompatibility = '1.7'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 ext {
-	mainClassName = "com.erdarkniel.flappybird.IOSLauncher"
+	mainClassName = "com.erdarkniel.fishyflappy.IOSLauncher"
 }
 
 launchIPhoneSimulator.dependsOn build

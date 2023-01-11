@@ -19,7 +19,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.erdarkniel.flappybird"
+        applicationId "com.erdarkniel.fishyflappy"
         minSdkVersion 14
         targetSdkVersion 32
         versionCode 1
@@ -84,7 +84,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.erdarkniel.flappybird/com.erdarkniel.flappybird.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.erdarkniel.fishyflappy/com.erdarkniel.fishyflappy.AndroidLauncher'
 }
 
 eclipse.project.name = appName + "-android"

@@ -4,8 +4,8 @@ gwt {
     minHeapSize="1G"
 
     src = files(file("src/")) // Needs to be in front of "modules" below.
-    modules 'com.erdarkniel.flappybird.GdxDefinition'
-    devModules 'com.erdarkniel.flappybird.GdxDefinitionSuperdev'
+    modules 'com.erdarkniel.fishyflappy.GdxDefinition'
+    devModules 'com.erdarkniel.fishyflappy.GdxDefinitionSuperdev'
     project.webAppDirName = 'webapp'
 
     compiler {
