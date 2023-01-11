@@ -1,5 +1,5 @@
 # FishyFlappy
 
-![Prototipo](https://myoctocat.com/assets/images/base-octocat.svg)
+![Prototipo](/assets/bird.png)
 
-Enlaze a [Figma](	/assets/bird.png).
+Enlaze a [Figma](https://www.figma.com/).
