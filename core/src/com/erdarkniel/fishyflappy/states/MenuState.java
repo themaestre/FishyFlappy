@@ -5,17 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.erdarkniel.fishyflappy.FishyFlappy;
 public class MenuState extends State{
-    private Texture bg;
-    private Texture playBtn;
+    private Texture bg,playBtn,title,fish;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
+        title = new Texture("logo.png");
         playBtn = new Texture("playbtn.png");
+        fish = new Texture("flappy.png");
     }
     @Override
     public void handleInput() {
-
         //Toque de entrada
         if (Gdx.input.justTouched()){
             gsm.set(new PlayState(gsm));
@@ -29,15 +29,19 @@ public class MenuState extends State{
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        //Dibujando el fondo y el play
+        //Dibujando los componentes
         spriteBatch.draw(bg,0,0);
+        spriteBatch.draw(title,camera.position.x - title.getWidth()/2,camera.position.y + title.getHeight()/2);
         spriteBatch.draw(playBtn,camera.position.x - playBtn.getWidth()/2,camera.position.y);
+        spriteBatch.draw(fish,camera.position.x - fish.getWidth()/2,camera.position.y - title.getHeight()*2);
         spriteBatch.end();
     }
     @Override
     public void dispose() {
         bg.dispose();
+        title.dispose();
         playBtn.dispose();
+        fish.dispose();
         System.out.println("Menu state disposed - Memoria limpia");
     }
 }
