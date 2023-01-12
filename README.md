@@ -40,10 +40,15 @@ el popular juego "Flappy Bird", y utilizarla como base para poder aprender cómo
 esta nueva librería.
 
 En el vídeo a continuación se puede ver este tipo de simulación para aprender a utilizar
-valores vectoriales de posición de objetos, cámaras, colliders mediante rectángulos invisibles,
-redimensiones sin BitMaps, etc.
+[valores vectoriales de posición de objetos](./core/src/com/erdarkniel/fishyflappy/sprites/Bird.java), [cámaras](./core/src/com/erdarkniel/fishyflappy/states/MenuState.java), [colliders mediante rectángulos invisibles](./core/src/com/erdarkniel/fishyflappy/sprites/Tube.java), [divisiones de imagen](./core/src/com/erdarkniel/fishyflappy/sprites/Bird.java), etc.
 
 https://user-images.githubusercontent.com/105220864/211762644-49f031ec-6a51-4837-87f5-b8d9e252d557.mp4
 
+Llegados aquí, hemos de cambiar los sprites que estabamos utilizando, por los del juego propio, y aquí llegamos a un problema,
+ya que los sprites utilizados y los realizados a mano no coincidían en tamaños, por lo que los sprites nuevos se veían gigantes.
+Así que tuvimos que poner crear Pixmap para poder variar a nuestro gusto el tamaño de los sprites, y así poder utilizarlos. Esto
+lo podemos encontrar en el archivo [Bird](./core/src/com/erdarkniel/fishyflappy/sprites/Bird.java).
 
+##Progreso actual
 
+Actualmente el proyecto se encuentra como las imágenes mostradas a continuación.
