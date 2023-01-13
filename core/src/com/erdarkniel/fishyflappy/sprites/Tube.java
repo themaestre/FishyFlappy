@@ -14,28 +14,44 @@ public class Tube {
     private Texture topTube,bottomTube;
     private Vector2 posTopTube,posBotTube;
     private Random rand;
-    private Rectangle boundsTop;
-    private Rectangle boundsBot;
+    private Rectangle boundsTop,boundsBot;
+    //Puntuacion
+    private Texture square;
+    private Vector2 squareV;
+    private Rectangle scoreColide;
     public Tube(float x){
         topTube = new Texture("toptube.png");
         bottomTube = new Texture("bottomtube.png");
+        //
+        square = new Texture("square.png");
         //posicion tuberia
         rand = new Random();
         posTopTube = new Vector2(x,rand.nextInt(FLUCTUATION)+TUBE_GAP+LOWEST_OPENING);
         posBotTube = new Vector2(x,posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+        //
+        squareV = new Vector2(x,square.getHeight());
         //colision
         boundsTop = new Rectangle(posTopTube.x,posTopTube.y,topTube.getWidth(),topTube.getHeight());
         boundsBot = new Rectangle(posBotTube.x,posBotTube.y,bottomTube.getWidth(),bottomTube.getHeight());
+        //
+        scoreColide = new Rectangle(squareV.x,squareV.y,square.getWidth(),square.getHeight());
     }
     public void reposition(float x){
         posTopTube.set(x,rand.nextInt(FLUCTUATION)+TUBE_GAP+LOWEST_OPENING);
         posBotTube.set(x,posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+        //
+        squareV.set(x,square.getHeight());
 
         boundsTop.setPosition(posTopTube.x,posTopTube.y);
         boundsBot.setPosition(posBotTube.x,posBotTube.y);
+        //
+        scoreColide.setPosition(squareV.x,squareV.y);
     }
     public boolean collides(Rectangle player){
         return player.overlaps(boundsTop) || player.overlaps(boundsBot);
+    }
+    public boolean scoreCollides(Rectangle player){
+        return player.overlaps(scoreColide);
     }
     public Texture getTopTube() {
         return topTube;
@@ -68,5 +84,5 @@ public class Tube {
     public void setPosBotTube(Vector2 posBotTube) {
         this.posBotTube = posBotTube;
     }
-    public void dispose(){topTube.dispose();bottomTube.dispose();}
+    public void dispose(){topTube.dispose();bottomTube.dispose();square.dispose();}
 }

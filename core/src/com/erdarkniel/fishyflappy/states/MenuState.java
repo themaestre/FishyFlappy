@@ -3,9 +3,11 @@ package com.erdarkniel.fishyflappy.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.erdarkniel.fishyflappy.FishyFlappy;
 public class MenuState extends State{
     private Texture bg,playBtn,title,fish;
+    Button star;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
@@ -13,13 +15,17 @@ public class MenuState extends State{
         title = new Texture("logo.png");
         playBtn = new Texture("playbtn.png");
         fish = new Texture("flappy.png");
+        star = new Button();
     }
     @Override
     public void handleInput() {
         //Toque de entrada
-        if (Gdx.input.justTouched()){
+        /*if (Gdx.input.justTouched()){
             gsm.set(new PlayState(gsm));
-        }
+        }*/
+        /*if (Gdx.input.isButtonPressed(star)){
+            gsm.set(new PlayState(gsm));
+        }*/
     }
     @Override
     public void update(float dt) {

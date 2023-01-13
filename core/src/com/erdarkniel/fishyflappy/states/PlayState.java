@@ -55,8 +55,17 @@ public class PlayState extends State{
             if (camera.position.x - (camera.viewportWidth/2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
+            /*if (camera.position.x < tube.getPosTopTube().x){
+                score++;
+                Gdx.app.log("Score", String.valueOf(score));
+            }*/
             if (tube.collides(bird.getBounds())){
-                gsm.set(new MenuState(gsm));//MenuState
+                gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
+                Gdx.app.log("Total Score", String.valueOf(score));
+            }
+            if (tube.scoreCollides(bird.getBounds())){
+                score++;
+                Gdx.app.log("Score", String.valueOf(score));
             }
         }
         if (bird.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
