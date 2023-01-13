@@ -7,40 +7,40 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.erdarkniel.fishyflappy.FishyFlappy;
-import com.erdarkniel.fishyflappy.sprites.Bird;
-import com.erdarkniel.fishyflappy.sprites.Tube;
+import com.erdarkniel.fishyflappy.sprites.Fish;
+import com.erdarkniel.fishyflappy.sprites.Bottle;
 
 public class PlayState extends State{
-    private static final int TUBE_SPACING = 125;
-    private static final int TUBE_COUNT = 4;
+    private static final int bottle_SPACING = 125;
+    private static final int bottle_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
-    private Bird bird;
+    private Fish fish;
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
-    private  Array<Tube> tubes;
+    private  Array<Bottle> bottles;
     //Puntuacion
     int score = 0;
     //Musica del juego
     private Music music;
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
-        bird = new Bird(50,320);
+        fish = new Fish(50,320);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(camera.position.x - camera.viewportWidth/2,GROUND_Y_OFFSET);
         groundPos2 = new Vector2((camera.position.x - camera.viewportWidth/2)+ground.getWidth(),GROUND_Y_OFFSET);
-        tubes = new Array<Tube>();
+        bottles = new Array<Bottle>();
         setUpMusic();
-        for (int i = 1; i <= TUBE_COUNT; i++) {
-            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
+        for (int i = 1; i <= bottle_COUNT; i++) {
+            bottles.add(new Bottle(i * (bottle_SPACING + Bottle.BOTTLE_WIDTH)));
         }
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()){
-            bird.jump();
+            fish.jump();
         }
     }
 
@@ -48,27 +48,27 @@ public class PlayState extends State{
     public void update(float dt) {
         handleInput();
         updateGround();
-        bird.update(dt);
-        camera.position.x = bird.getPosition().x + 80;
-        for (int i = 0;i<tubes.size;i++){
-            Tube tube = tubes.get(i);
-            if (camera.position.x - (camera.viewportWidth/2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+        fish.update(dt);
+        camera.position.x = fish.getPosition().x + 80;
+        for (int i = 0;i<bottles.size;i++){
+            Bottle bottle = bottles.get(i);
+            if (camera.position.x - (camera.viewportWidth/2) > bottle.getPosTopBottle().x + bottle.getTopBottle().getWidth()){
+                bottle.reposition(bottle.getPosTopBottle().x + ((Bottle.BOTTLE_WIDTH + bottle_SPACING) * bottle_COUNT));
             }
-            /*if (camera.position.x < tube.getPosTopTube().x){
+            /*if (camera.position.x < bottle.getPosTopbottle().x){
                 score++;
                 Gdx.app.log("Score", String.valueOf(score));
             }*/
-            if (tube.collides(bird.getBounds())){
+            if (bottle.collides(fish.getBounds())){
                 gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
                 Gdx.app.log("Total Score", String.valueOf(score));
             }
-            if (tube.scoreCollides(bird.getBounds())){
+            /*if (bottle.scoreCollides(bird.getBounds())){
                 score++;
                 Gdx.app.log("Score", String.valueOf(score));
-            }
+            }*/
         }
-        if (bird.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
+        if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
             gsm.set(new MenuState(gsm));
         }
         camera.update();
@@ -79,10 +79,10 @@ public class PlayState extends State{
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
-        spriteBatch.draw(bird.getBird(),bird.getPosition().x,bird.getPosition().y);
-        for (Tube tube : tubes){
-            spriteBatch.draw(tube.getTopTube(),tube.getPosTopTube().x,tube.getPosTopTube().y);
-            spriteBatch.draw(tube.getBottomTube(),tube.getPosBotTube().x,tube.getPosBotTube().y);
+        spriteBatch.draw(fish.getBird(), fish.getPosition().x, fish.getPosition().y);
+        for (Bottle bottle : bottles){
+            spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
+            spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
         }
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
@@ -93,10 +93,10 @@ public class PlayState extends State{
     public void dispose() {
         bg.dispose();
         ground.dispose();
-        bird.dispose();
+        fish.dispose();
         music.dispose();
-        for (Tube tube : tubes){
-            tube.dispose();
+        for (Bottle bottle : bottles){
+            bottle.dispose();
         }
         System.out.println("Play state disposed");
     }

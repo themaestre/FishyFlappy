@@ -4,10 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.erdarkniel.fishyflappy.FishyFlappy;
 public class MenuState extends State{
     private Texture bg,playBtn,title,fish,rate;
@@ -23,9 +19,6 @@ public class MenuState extends State{
                 0, 0, pixmapPT.getWidth(), pixmapPT.getHeight()
         );
         title = new Texture(pixmapPT);
-        pixmapGT.dispose();
-        pixmapPT.dispose();
-
         Pixmap pixmapG = new Pixmap(Gdx.files.internal("button_play.png"));
         Pixmap pixmapP = new Pixmap(110, 100, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,

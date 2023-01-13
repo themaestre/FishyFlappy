@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class Bird {
+public class Fish {
     private static final int MOVEMENT = 100;
     private static final int GRAVITY = -20;
     private Vector3 position;
@@ -17,10 +17,10 @@ public class Bird {
     private Rectangle bounds;
     private Animation birdAnimation;
     private Sound flap;
-    public Bird(int x, int y) {
+    public Fish(int x, int y) {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
-        Pixmap pixmapG = new Pixmap(Gdx.files.internal("anim2.png"));
+        Pixmap pixmapG = new Pixmap(Gdx.files.internal("fishanimation.png"));
         Pixmap pixmapP = new Pixmap(126, 24, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
