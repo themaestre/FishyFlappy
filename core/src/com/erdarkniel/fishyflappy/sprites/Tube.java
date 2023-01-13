@@ -17,15 +17,15 @@ public class Tube {
     private Rectangle boundsTop;
     private Rectangle boundsBot;
     public Tube(float x){
-        topTube = new Texture("toptube.png");
-        bottomTube = new Texture("bottomtube.png");
+        topTube = new Texture("bottle.png");
+        bottomTube = new Texture("bottle_ds.png");
         //posicion tuberia
         rand = new Random();
         posTopTube = new Vector2(x,rand.nextInt(FLUCTUATION)+TUBE_GAP+LOWEST_OPENING);
         posBotTube = new Vector2(x,posTopTube.y - TUBE_GAP - bottomTube.getHeight());
         //colision
-        boundsTop = new Rectangle(posTopTube.x,posTopTube.y,topTube.getWidth(),topTube.getHeight());
-        boundsBot = new Rectangle(posBotTube.x,posBotTube.y,bottomTube.getWidth(),bottomTube.getHeight());
+        boundsTop = new Rectangle(posTopTube.x,posTopTube.y,topTube.getWidth()-10,topTube.getHeight());
+        boundsBot = new Rectangle(posBotTube.x,posBotTube.y,bottomTube.getWidth()-10,bottomTube.getHeight());
     }
     public void reposition(float x){
         posTopTube.set(x,rand.nextInt(FLUCTUATION)+TUBE_GAP+LOWEST_OPENING);

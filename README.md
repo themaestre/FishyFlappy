@@ -1,6 +1,7 @@
 # FishyFlappy
 
 ##Descripción general y propósito del juego
+
 Fishy es un juego diseñado en Android Studio para concienciar a la gente del peligro
 que tiene tirar residuos plásticos al mar mediante el no reciclaje. A continuación se
 detallará como es la aplicación y transcurso que siguió.
@@ -28,7 +29,7 @@ por lo que nos dificulta hacerlo de un modo más sencillo.
 
 Cabe decir que todos los sprites utilizados fueron hechos a mano por nuestro equipo.
 
-![Imagen del prototipo en Figma](/screenshots/screenshot_figma_scenes.png)
+![Imagen del prototipo en Figma](./screenshots/screenshot_figma_scenes.png)
 
 ##Paso del prototipo a la aplicación
 
