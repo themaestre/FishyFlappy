@@ -1,12 +1,12 @@
 # FishyFlappy
 
-##Descripción general y propósito del juego
+## Descripción general y propósito del juego
 
 Fishy es un juego diseñado en Android Studio para concienciar a la gente del peligro
 que tiene tirar residuos plásticos al mar mediante el no reciclaje. A continuación se
 detallará como es la aplicación y transcurso que siguió.
 
-##Prototipo de la aplicación
+## Prototipo de la aplicación
 
 El [prototipo de la aplicación sería](https://www.figma.com/proto/jwDlWC1p46czR1ZfwXxDD1/Fishy-Flappy?node-id=2%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=2%3A2) algo simple,
 pues cuenta con una splash screen, la cual en el producto final estará animada con
@@ -31,7 +31,7 @@ Cabe decir que todos los sprites utilizados fueron hechos a mano por nuestro equ
 
 ![Imagen del prototipo en Figma](assets/Main.png)
 
-##Paso del prototipo a la aplicación
+## Paso del prototipo a la aplicación
 
 Una vez que el prototipo estaba terminado, se pasó a la aplicación, para ello, se creó
 el proyecto utilizando la librería [LibGDX](https://libgdx.com/), la cual nos permite crear juegos en Java.
@@ -50,6 +50,6 @@ ya que los sprites utilizados y los realizados a mano no coincidían en tamaños
 Así que tuvimos que poner crear Pixmap para poder variar a nuestro gusto el tamaño de los sprites, y así poder utilizarlos. Esto
 lo podemos encontrar en el archivo [Fish](./core/src/com/erdarkniel/fishyflappy/sprites/Fish.java).
 
-##Progreso actual
+## Progreso actual
 
 Actualmente el proyecto se encuentra como las imágenes mostradas a continuación.
