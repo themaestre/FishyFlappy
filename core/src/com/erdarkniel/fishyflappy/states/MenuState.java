@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.erdarkniel.fishyflappy.FishyFlappy;
 public class MenuState extends State{
-    private Texture bg,playBtn,title,fish,rate;
+    private final int PLAYXLEFT=130,PLAYXRIGHT=350,PLAYYUP=360,PLAYYDOWN=560;
+    private final int EXITXLEFT=80,EXITXRIGHT=400,EXITYUP=595,EXITYDOWN=700;
+    private Texture bg,playBtn,title,fish,exit;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
@@ -26,9 +28,6 @@ public class MenuState extends State{
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()
         );
         playBtn = new Texture(pixmapP);
-        pixmapG.dispose();
-        pixmapP.dispose();
-
 
         Pixmap pixmapGF = new Pixmap(Gdx.files.internal("flappy.png"));
         Pixmap pixmapPF = new Pixmap(100, 100, pixmapGF.getFormat());
@@ -37,37 +36,32 @@ public class MenuState extends State{
                 0, 0, pixmapPF.getWidth(), pixmapPF.getHeight()
         );
         fish = new Texture(pixmapPF);
-        pixmapGF.dispose();
-        pixmapPF.dispose();
 
-        Pixmap pixmapGR = new Pixmap(Gdx.files.internal("rate us.png"));
+        Pixmap pixmapGR = new Pixmap(Gdx.files.internal("exit.png"));
         Pixmap pixmapPR = new Pixmap(200, 60, pixmapGR.getFormat());
         pixmapPR.drawPixmap(pixmapGR,
                 0, 0, pixmapGR.getWidth(), pixmapGR.getHeight(),
                 0, 0, pixmapPR.getWidth(), pixmapPR.getHeight()
         );
-        rate = new Texture(pixmapPR);
-        pixmapGR.dispose();
-        pixmapPR.dispose();
+        exit = new Texture(pixmapPR);
     }
-
-    //ImageButton button = new ImageButton(playBtn);
-
     @Override
     public void handleInput() {
         //Toque de entrada
-        //if (Gdx.input.justTouched()){
-            /*
-            button.addListener( new ClickListener(){
-                public void clicked(InputEvent event, float x, float y){
-                    gsm.set(new PlayState(gsm));
-                }
-            });*/
-            //gsm.set(new PlayState(gsm));
-        //}
-        if (Gdx.input.getX()<camera.position.x - playBtn.getWidth()/2&&Gdx.input.getY()>camera.position.y - playBtn.getHeight()){
-            gsm.set(new PlayState(gsm));
+        if (Gdx.input.getX()>=PLAYXLEFT&&Gdx.input.getX()<=PLAYXRIGHT&&
+        Gdx.input.getY()>=PLAYYUP&&Gdx.input.getY()<=PLAYYDOWN){
+            if (Gdx.input.justTouched()){
+                gsm.set(new PlayState(gsm));
+            }
         }
+        if (Gdx.input.getX()>=EXITXLEFT&&Gdx.input.getX()<=EXITXRIGHT&&
+                Gdx.input.getY()>=EXITYUP&&Gdx.input.getY()<=EXITYDOWN){
+            if (Gdx.input.justTouched()){
+                Gdx.app.exit();
+            }
+        }
+        //System.out.println("Posicion x "+Gdx.input.getX());
+        //System.out.println("Posicion y "+Gdx.input.getY());
     }
 
     @Override
@@ -83,7 +77,7 @@ public class MenuState extends State{
         spriteBatch.draw(title,camera.position.x - title.getWidth()/2,camera.position.y + title.getHeight()/3);
         spriteBatch.draw(playBtn,camera.position.x - playBtn.getWidth()/2,camera.position.y - playBtn.getHeight());
         spriteBatch.draw(fish, (float) (camera.position.x - fish.getWidth()/1.75),camera.position.y - fish.getHeight()/10);
-        spriteBatch.draw(rate,camera.position.x - rate.getWidth()/2, (float) (camera.position.y - rate.getHeight()/0.35));
+        spriteBatch.draw(exit,camera.position.x - exit.getWidth()/2, (float) (camera.position.y - exit.getHeight()/0.35));
         spriteBatch.end();
     }
     @Override
@@ -92,7 +86,7 @@ public class MenuState extends State{
         title.dispose();
         playBtn.dispose();
         fish.dispose();
-        rate.dispose();
+        exit.dispose();
         System.out.println("Menu state disposed - Memoria limpia");
     }
 }

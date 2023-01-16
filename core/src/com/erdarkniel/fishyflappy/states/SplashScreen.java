@@ -25,6 +25,6 @@ public class SplashScreen extends State{
     }
     @Override
     public void dispose() {
-        System.out.println("Menu state disposed - Memoria limpia");
+
     }
 }
