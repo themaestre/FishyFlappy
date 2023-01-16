@@ -56,17 +56,18 @@ public class MenuState extends State{
     @Override
     public void handleInput() {
         //Toque de entrada
-
-        if (Gdx.input.justTouched()){
+        //if (Gdx.input.justTouched()){
             /*
             button.addListener( new ClickListener(){
                 public void clicked(InputEvent event, float x, float y){
                     gsm.set(new PlayState(gsm));
                 }
             });*/
+            //gsm.set(new PlayState(gsm));
+        //}
+        if (Gdx.input.getX()<camera.position.x - playBtn.getWidth()/2&&Gdx.input.getY()>camera.position.y - playBtn.getHeight()){
             gsm.set(new PlayState(gsm));
         }
-
     }
 
     @Override
