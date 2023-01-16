@@ -18,6 +18,8 @@ public abstract class State {
         camera = new OrthographicCamera();
         mouse = new Vector3();
     }
+
+
     //Metodo deteccion de entradas
     protected abstract void handleInput();
     //Metodo que determina los estados: ejecucion ,carga y actualizarlos
