@@ -2,6 +2,7 @@ package com.erdarkniel.fishyflappy.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -10,12 +11,14 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import com.erdarkniel.fishyflappy.sprites.Fish;
 import com.erdarkniel.fishyflappy.sprites.Bottle;
 
+
 public class PlayState extends State{
     private static final int bottle_SPACING = 125;
     private static final int bottle_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
+    private boolean pause=false;
     private Fish fish;
-    private Texture bg,ground;
+    private Texture bg,ground, pauseBtn, settings;
     private Vector2 groundPos1,groundPos2;
     private  Array<Bottle> bottles;
     //Puntuacion
@@ -24,6 +27,24 @@ public class PlayState extends State{
     private Music music;
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
+
+        Pixmap pixmapGP = new Pixmap(Gdx.files.internal("pause_button.png"));
+        Pixmap pixmapPP = new Pixmap(25, 25, pixmapGP.getFormat());
+        pixmapPP.drawPixmap(pixmapGP,
+                0, 0, pixmapGP.getWidth(), pixmapGP.getHeight(),
+                0, 0, pixmapPP.getWidth(), pixmapPP.getHeight()
+        );
+        pauseBtn = new Texture(pixmapPP);
+
+
+        Pixmap pixmapGS = new Pixmap(Gdx.files.internal("pause_button.png"));
+        Pixmap pixmapPS = new Pixmap(250, 550, pixmapGS.getFormat());
+        pixmapPS.drawPixmap(pixmapGS,
+                0, 0, pixmapGS.getWidth(), pixmapGS.getHeight(),
+                0, 0, pixmapPS.getWidth(), pixmapPS.getHeight()
+        );
+        settings = new Texture(pixmapPS);
+
         fish = new Fish(50,320);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
@@ -42,6 +63,19 @@ public class PlayState extends State{
         if (Gdx.input.justTouched()){
             fish.jump();
         }
+
+        //System.out.println("Posicion x "+Gdx.input.getX());
+        //System.out.println("Posicion y "+Gdx.input.getY());
+
+        if (Gdx.input.getX()>=10&&Gdx.input.getX()<=60&&
+                Gdx.input.getY()>=15&&Gdx.input.getY()<=60){
+            if (Gdx.input.justTouched()){
+                System.out.println("Pausa");
+                pause = true;
+            }
+        }
+
+
     }
 
     @Override
@@ -60,6 +94,7 @@ public class PlayState extends State{
                 Gdx.app.log("Score", String.valueOf(score));
             }*/
             if (bottle.collides(fish.getBounds())){
+                Gdx.input.vibrate(1000);
                 gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
                 Gdx.app.log("Total Score", String.valueOf(score));
             }
@@ -72,22 +107,32 @@ public class PlayState extends State{
             gsm.set(new MenuState(gsm));
         }
         camera.update();
+        if(pause){
+
+        }
+
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
+
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
         spriteBatch.draw(fish.getBird(), fish.getPosition().x, fish.getPosition().y);
         for (Bottle bottle : bottles){
             spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
         }
+        spriteBatch.draw(pauseBtn,camera.position.x-115,camera.position.y+150);
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
+
+
+
     }
+
 
     @Override
     public void dispose() {
@@ -114,4 +159,5 @@ public class PlayState extends State{
         music.setVolume(0.1f);
         music.play();
     }
+
 }

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class Fish {
+public class Fish{
     private static final int MOVEMENT = 100;
     private static final int GRAVITY = -20;
     private Vector3 position;
