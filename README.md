@@ -53,3 +53,12 @@ lo podemos encontrar en el archivo [Fish](./core/src/com/erdarkniel/fishyflappy/
 ## Progreso actual
 
 Actualmente el proyecto se encuentra como las imágenes mostradas a continuación.
+
+Falta realizar las animaciones del Splash Screen por lo que se ve todo azul.
+
+![Splash Screen](./Screenshots/splashscreen.png)
+
+![Menu Screen](./Screenshots/menuscreen.png)
+
+![In Game Footage](./Screenshots/gameplayfootage.png)
+
