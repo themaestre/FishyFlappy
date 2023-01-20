@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.erdarkniel.fishyflappy.states.GameStateManager;
 import com.erdarkniel.fishyflappy.states.MenuState;
+import com.erdarkniel.fishyflappy.states.SplashScreen;
 
 public class FishyFlappy extends ApplicationAdapter {
 	//TAMALLO PANTALLA
@@ -22,7 +23,7 @@ public class FishyFlappy extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		ScreenUtils.clear(0, 0, 1, 1);
-		gsm.push(new MenuState(gsm));
+		gsm.push(new SplashScreen(gsm));
 	}
 	@Override
 	public void render () {

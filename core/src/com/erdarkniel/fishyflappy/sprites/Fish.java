@@ -13,28 +13,26 @@ public class Fish {
     private static final int GRAVITY = -20;
     private Vector3 position;
     private Vector3 velocity;
-    private Texture bird;
+    private Texture fish;
     private Rectangle bounds;
-    private Animation birdAnimation;
+    private Animation fishAnimation;
     private Sound flap;
     public Fish(int x, int y) {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
         Pixmap pixmapG = new Pixmap(Gdx.files.internal("fishanimation.png"));
-        Pixmap pixmapP = new Pixmap(126, 24, pixmapG.getFormat());
+        Pixmap pixmapP = new Pixmap(102, 24, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()
         );
-        bird = new Texture(pixmapP);
-        pixmapG.dispose();
-        pixmapP.dispose();
-        birdAnimation = new Animation(new TextureRegion(bird),3,0.5f);
+        fish = new Texture(pixmapP);
+        fishAnimation = new Animation(new TextureRegion(fish),3,0.5f);
         flap = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
-        bounds = new Rectangle(x,y,bird.getWidth()/3,bird.getHeight());
+        bounds = new Rectangle(x,y,fish.getWidth()/3,fish.getHeight());
     }
     public void update(float dt){
-        birdAnimation.update(dt);
+        fishAnimation.update(dt);
         if (position.y > 0){
             velocity.add(0,GRAVITY,0);
         }
@@ -48,13 +46,13 @@ public class Fish {
     }
     public Rectangle getBounds(){return bounds;}
     public Vector3 getPosition() {return position;}
-    public TextureRegion getBird() {return birdAnimation.getFrame();}
+    public TextureRegion getFish() {return fishAnimation.getFrame();}
     public void jump(){
         velocity.y = 250;
         flap.play(0.4f);
     }
     public void dispose(){
-        bird.dispose();
+        fish.dispose();
         flap.dispose();
     }
 }

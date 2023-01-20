@@ -2,7 +2,9 @@ package com.erdarkniel.fishyflappy.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -17,9 +19,10 @@ public class PlayState extends State{
     private Fish fish;
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
-    private  Array<Bottle> bottles;
+    private Array<Bottle> bottles;
     //Puntuacion
-    int score = 0;
+    private BitmapFont puntuacion;
+    int score = 0,totalscore=0;
     //Musica del juego
     private Music music;
     public PlayState(GameStateManager gameStateManager) {
@@ -27,6 +30,9 @@ public class PlayState extends State{
         fish = new Fish(50,320);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
+        puntuacion = new BitmapFont();
+        puntuacion.setColor(Color.BLACK);
+        puntuacion.getData().setScale(2);
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(camera.position.x - camera.viewportWidth/2,GROUND_Y_OFFSET);
         groundPos2 = new Vector2((camera.position.x - camera.viewportWidth/2)+ground.getWidth(),GROUND_Y_OFFSET);
@@ -55,21 +61,21 @@ public class PlayState extends State{
             if (camera.position.x - (camera.viewportWidth/2) > bottle.getPosTopBottle().x + bottle.getTopBottle().getWidth()){
                 bottle.reposition(bottle.getPosTopBottle().x + ((Bottle.BOTTLE_WIDTH + bottle_SPACING) * bottle_COUNT));
             }
-            /*if (camera.position.x < bottle.getPosTopbottle().x){
+            if (bottle.scoreCollides(fish.getBounds())){
                 score++;
-                Gdx.app.log("Score", String.valueOf(score));
-            }*/
+                if (score%21==0) {
+                    Gdx.app.log("Score", String.valueOf(score/21));
+                    totalscore++;
+                }
+            }
             if (bottle.collides(fish.getBounds())){
                 gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
-                Gdx.app.log("Total Score", String.valueOf(score));
+                Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
-            /*if (bottle.scoreCollides(bird.getBounds())){
-                score++;
-                Gdx.app.log("Score", String.valueOf(score));
-            }*/
         }
         if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
             gsm.set(new MenuState(gsm));
+            Gdx.app.log("Total Score", String.valueOf(totalscore));
         }
         camera.update();
     }
@@ -79,10 +85,12 @@ public class PlayState extends State{
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
-        spriteBatch.draw(fish.getBird(), fish.getPosition().x, fish.getPosition().y);
+        puntuacion.draw(spriteBatch, String.valueOf(totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
+        spriteBatch.draw(fish.getFish(), fish.getPosition().x, fish.getPosition().y);
         for (Bottle bottle : bottles){
             spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
+            spriteBatch.draw(bottle.getSquare(),bottle.getPosSquare().x,bottle.getPosSquare().y);
         }
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);

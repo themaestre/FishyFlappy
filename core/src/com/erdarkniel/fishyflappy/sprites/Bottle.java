@@ -3,6 +3,7 @@ package com.erdarkniel.fishyflappy.sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.erdarkniel.fishyflappy.states.PlayState;
 
 import java.util.Random;
 
@@ -11,21 +12,23 @@ public class Bottle {
     private static final int FLUCTUATION = 130;
     private static final int BOTTLE_GAP = 100;
     private static final int LOWEST_OPENING = 120;
-    private Texture topBottle,bottomBottle;
-    private Vector2 posTopBottle,posBotBottle;
+    private Texture topBottle,bottomBottle,square;
+    private Vector2 posTopBottle,posBotBottle,posSquare;
     private Random rand;
-    private Rectangle boundsTop;
-    private Rectangle boundsBot;
+    private Rectangle boundsTop,boundsBot,boundsSquare;
     public Bottle(float x){
         topBottle = new Texture("topbottle.png");
         bottomBottle = new Texture("bottombottle.png");
-        //posicion tuberia
+        square = new Texture("square.png");
+        //posicion boyella y puntuacion
         rand = new Random();
         posTopBottle = new Vector2(x,rand.nextInt(FLUCTUATION)+BOTTLE_GAP+LOWEST_OPENING);
         posBotBottle = new Vector2(x,posTopBottle.y - BOTTLE_GAP - bottomBottle.getHeight());
+        posSquare = new Vector2(x+(topBottle.getWidth()/2),posTopBottle.y-square.getHeight());
         //colision
         boundsTop = new Rectangle(posTopBottle.x,posTopBottle.y,topBottle.getWidth()-10,topBottle.getHeight());
         boundsBot = new Rectangle(posBotBottle.x,posBotBottle.y,bottomBottle.getWidth()-10,bottomBottle.getHeight());
+        boundsSquare = new Rectangle(posSquare.x,posSquare.y,square.getWidth(),square.getHeight());
     }
     public void reposition(float x){
         posTopBottle.set(x,rand.nextInt(FLUCTUATION)+BOTTLE_GAP+LOWEST_OPENING);
@@ -33,10 +36,25 @@ public class Bottle {
 
         boundsTop.setPosition(posTopBottle.x,posTopBottle.y);
         boundsBot.setPosition(posBotBottle.x,posBotBottle.y);
+        //Puntuacion
+        posSquare.set(x+(topBottle.getWidth()/2),posTopBottle.y - square.getHeight());
+        boundsSquare.setPosition(posSquare.x,posSquare.y);
     }
     public boolean collides(Rectangle player){
         return player.overlaps(boundsTop) || player.overlaps(boundsBot);
     }
+    public boolean scoreCollides(Rectangle player){
+        return player.overlaps(boundsSquare);
+    }
+
+    public Texture getSquare() {
+        return square;
+    }
+
+    public Vector2 getPosSquare() {
+        return posSquare;
+    }
+
     public Texture getTopBottle() {
         return topBottle;
     }
