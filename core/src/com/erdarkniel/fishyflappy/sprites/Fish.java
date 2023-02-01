@@ -21,7 +21,7 @@ public class Fish {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
         Pixmap pixmapG = new Pixmap(Gdx.files.internal("fishanimation.png"));
-        Pixmap pixmapP = new Pixmap(102, 24, pixmapG.getFormat());
+        Pixmap pixmapP = new Pixmap(100, 24, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()

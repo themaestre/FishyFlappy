@@ -12,6 +12,9 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import com.erdarkniel.fishyflappy.sprites.Fish;
 import com.erdarkniel.fishyflappy.sprites.Bottle;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class PlayState extends State{
     private static final int bottle_SPACING = 125;
     private static final int bottle_COUNT = 4;
@@ -21,7 +24,8 @@ public class PlayState extends State{
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
     //Puntuacion
-    private BitmapFont puntuacion;
+    //ArrayList<Integer> arrayScore = new ArrayList<Integer>();
+    /*private*/BitmapFont puntuacion;
     int score = 0,totalscore=0;
     //Musica del juego
     private Music music;
@@ -63,19 +67,24 @@ public class PlayState extends State{
             }
             if (bottle.scoreCollides(fish.getBounds())){
                 score++;
-                if (score%21==0) {
-                    Gdx.app.log("Score", String.valueOf(score/21));
+                //System.out.println(score);
+                if (score%20==0) {
+                    //Gdx.app.log("Score", String.valueOf(score/21));
+                    score = score/20;
                     totalscore++;
                 }
             }
             if (bottle.collides(fish.getBounds())){
-                gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
-                Gdx.app.log("Total Score", String.valueOf(totalscore));
+                gsm.set(new GameOver(gsm));
+                //arrayScore.add(totalscore);
+                //Collections.sort(arrayScore);
+                //System.out.println(arrayScore);
+                //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
         }
         if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
-            gsm.set(new MenuState(gsm));
-            Gdx.app.log("Total Score", String.valueOf(totalscore));
+            gsm.set(new GameOver(gsm));
+            //Gdx.app.log("Total Score", String.valueOf(totalscore));
         }
         camera.update();
     }
@@ -85,13 +94,13 @@ public class PlayState extends State{
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
-        puntuacion.draw(spriteBatch, String.valueOf(totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
         spriteBatch.draw(fish.getFish(), fish.getPosition().x, fish.getPosition().y);
         for (Bottle bottle : bottles){
             spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
             spriteBatch.draw(bottle.getSquare(),bottle.getPosSquare().x,bottle.getPosSquare().y);
         }
+        puntuacion.draw(spriteBatch, String.valueOf(totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
@@ -100,6 +109,7 @@ public class PlayState extends State{
     @Override
     public void dispose() {
         bg.dispose();
+        puntuacion.dispose();
         ground.dispose();
         fish.dispose();
         music.dispose();
@@ -122,4 +132,10 @@ public class PlayState extends State{
         music.setVolume(0.1f);
         music.play();
     }
+    /*public int getTotalscore(){
+        arrayScore.add(totalscore);
+        Collections.sort(arrayScore);
+        return totalscore;
+    }*/
+    public void puause(){}
 }

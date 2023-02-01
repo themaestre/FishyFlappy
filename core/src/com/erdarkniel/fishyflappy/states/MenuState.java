@@ -15,7 +15,7 @@ public class MenuState extends State{
         bg = new Texture("bg.png");
 
         Pixmap pixmapGT = new Pixmap(Gdx.files.internal("main_logo.png"));
-        Pixmap pixmapPT = new Pixmap(336, 150, pixmapGT.getFormat());
+        Pixmap pixmapPT = new Pixmap(340, 150, pixmapGT.getFormat());
         pixmapPT.drawPixmap(pixmapGT,
                 0, 0, pixmapGT.getWidth(), pixmapGT.getHeight(),
                 0, 0, pixmapPT.getWidth(), pixmapPT.getHeight()
@@ -76,8 +76,8 @@ public class MenuState extends State{
         spriteBatch.draw(bg,0,0);
         spriteBatch.draw(title,camera.position.x - title.getWidth()/2,camera.position.y + title.getHeight()/3);
         spriteBatch.draw(playBtn,camera.position.x - playBtn.getWidth()/2,camera.position.y - playBtn.getHeight());
-        spriteBatch.draw(fish, (float) (camera.position.x - fish.getWidth()/1.75),camera.position.y - fish.getHeight()/10);
-        spriteBatch.draw(exit,camera.position.x - exit.getWidth()/2, (float) (camera.position.y - exit.getHeight()/0.35));
+        spriteBatch.draw(fish,camera.position.x - fish.getWidth()/2,camera.position.y);
+        spriteBatch.draw(exit,camera.position.x - exit.getWidth()/2, camera.position.y - exit.getHeight()*3);
         spriteBatch.end();
     }
     @Override
