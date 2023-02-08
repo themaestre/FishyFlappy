@@ -8,7 +8,7 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 public class SplashScreen extends State{
     private float lifeTime;
     private Long delay = 2L; //1000 milliseconds per second, so 2 seconds.
-    private Texture title,fish;
+    private Texture title,fish, bg;
     public SplashScreen(GameStateManager gameStateManager) {
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
@@ -26,6 +26,7 @@ public class SplashScreen extends State{
                 0, 0, pixmapPF.getWidth(), pixmapPF.getHeight()
         );
         fish = new Texture(pixmapPF);
+        bg = new Texture(Gdx.files.internal("bg.png"));
     }
     @Override
     public void handleInput() {
@@ -45,6 +46,7 @@ public class SplashScreen extends State{
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
+        spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
         spriteBatch.draw(title,camera.position.x - title.getWidth()/2,camera.position.y - title.getHeight());
         spriteBatch.draw(fish,camera.position.x - fish.getWidth()/2,camera.position.y);
         spriteBatch.end();

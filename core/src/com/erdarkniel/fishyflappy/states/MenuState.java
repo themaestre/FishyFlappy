@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.erdarkniel.fishyflappy.FishyFlappy;
+
+import jdk.internal.org.jline.utils.Display;
+
 public class MenuState extends State{
-    private final int PLAYXLEFT=130,PLAYXRIGHT=350,PLAYYUP=360,PLAYYDOWN=560;
-    private final int EXITXLEFT=80,EXITXRIGHT=400,EXITYUP=595,EXITYDOWN=700;
+    private final int PLAYXLEFT=(int)(Gdx.graphics.getWidth()/2.8),PLAYXRIGHT=(int)(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/2.8),PLAYYUP=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/2),PLAYYDOWN=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/4.407);
+    private final int EXITXLEFT=(int)(Gdx.graphics.getWidth()*0.165),EXITXRIGHT=(int)(Gdx.graphics.getWidth()*0.83981),EXITYUP=(int)(Gdx.graphics.getHeight()*0.8522),EXITYDOWN=(int)(Gdx.graphics.getHeight()*0.98606);
     private Texture bg,playBtn,title,fish,exit;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -60,8 +63,8 @@ public class MenuState extends State{
                 Gdx.app.exit();
             }
         }
-        //System.out.println("Posicion x "+Gdx.input.getX());
-        //System.out.println("Posicion y "+Gdx.input.getY());
+        //System.out.println(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
     }
 
     @Override

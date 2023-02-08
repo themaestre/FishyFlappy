@@ -1,5 +1,7 @@
 package com.erdarkniel.fishyflappy.states;
 
+
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -9,11 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.erdarkniel.fishyflappy.FishyFlappy;
-import com.erdarkniel.fishyflappy.sprites.Fish;
 import com.erdarkniel.fishyflappy.sprites.Bottle;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import com.erdarkniel.fishyflappy.sprites.Fish;
 
 public class PlayState extends State{
     private static final int bottle_SPACING = 125;
@@ -23,10 +22,12 @@ public class PlayState extends State{
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
+
     //Puntuacion
     //ArrayList<Integer> arrayScore = new ArrayList<Integer>();
     /*private*/BitmapFont puntuacion;
-    int score = 0,totalscore=0;
+    int score = 0;
+    static int totalscore=0;
     //Musica del juego
     private Music music;
     public PlayState(GameStateManager gameStateManager) {
@@ -82,9 +83,14 @@ public class PlayState extends State{
                 //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
         }
+
+        //TRABAJAR SOBRE ESTE CON LA BASE DE DATOS
         if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
             gsm.set(new GameOver(gsm));
-            //Gdx.app.log("Total Score", String.valueOf(totalscore));
+            Gdx.app.log("Total Score", String.valueOf(totalscore));
+
+            totalscore = 0;
+
         }
         camera.update();
     }
@@ -137,5 +143,10 @@ public class PlayState extends State{
         Collections.sort(arrayScore);
         return totalscore;
     }*/
-    public void puause(){}
+    public static int getTotalScore(){
+
+        return totalscore;
+    }
+
+
 }
