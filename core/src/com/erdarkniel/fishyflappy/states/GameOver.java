@@ -7,10 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.erdarkniel.fishyflappy.FishyFlappy;
 public class GameOver extends State{
-    private final int MENUXLEFT=115,MENUXRIGHT=365,MENUYUP=645,MENUYDOWN=705;
+    private static final int MENUXLEFT=115,MENUXRIGHT=365,MENUYUP=645,MENUYDOWN=705;
     private Texture bg,gotomenubtn,game_over;
-    //private BitmapFont puntuacion;
-    //private PlayState playState;
     public GameOver(GameStateManager gameStateManager) {
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
@@ -29,15 +27,9 @@ public class GameOver extends State{
         bg = new Texture("bg.png");
         gotomenubtn = new Texture(pixmapPT);
         game_over = new Texture(pixmapP);
-        /*puntuacion = new BitmapFont();
-        puntuacion.setColor(Color.BLACK);
-        puntuacion.getData().setScale(2);*/
-        //playState = new PlayState(gameStateManager);
-        //System.out.println(playState.arrayScore.get(playState.arrayScore.size()-1));
     }
     @Override
     protected void handleInput() {
-
         if (Gdx.input.getX()>=MENUXLEFT&&Gdx.input.getX()<=MENUXRIGHT&&
                 Gdx.input.getY()>=MENUYUP&&Gdx.input.getY()<=MENUYDOWN){
             if (Gdx.input.justTouched()){
@@ -62,7 +54,6 @@ public class GameOver extends State{
         spriteBatch.draw(game_over,camera.position.x - game_over.getWidth()/2,camera.position.y + game_over.getHeight()/10);
         spriteBatch.end();
     }
-
     @Override
     public void dispose() {
         bg.dispose();
