@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.erdarkniel.fishyflappy.FishyFlappy;
+
+import jdk.internal.org.jline.utils.Display;
+
 public class MenuState extends State{
-    private static final int PLAYXLEFT=130,PLAYXRIGHT=350,PLAYYUP=360,PLAYYDOWN=560;
-    private static final int EXITXLEFT=80,EXITXRIGHT=400,EXITYUP=595,EXITYDOWN=700;
+    private final int PLAYXLEFT=(int)(Gdx.graphics.getWidth()/2.8),PLAYXRIGHT=(int)(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/2.8),PLAYYUP=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/2),PLAYYDOWN=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/4.407);
+    private final int EXITXLEFT=(int)(Gdx.graphics.getWidth()*0.165),EXITXRIGHT=(int)(Gdx.graphics.getWidth()*0.83981),EXITYUP=(int)(Gdx.graphics.getHeight()*0.8522),EXITYDOWN=(int)(Gdx.graphics.getHeight()*0.98606);
     private Texture bg,playBtn,title,fish,exit;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -24,7 +24,7 @@ public class MenuState extends State{
                 0, 0, pixmapPT.getWidth(), pixmapPT.getHeight()
         );
         title = new Texture(pixmapPT);
-       Pixmap pixmapG = new Pixmap(Gdx.files.internal("button_play.png"));
+        Pixmap pixmapG = new Pixmap(Gdx.files.internal("button_play.png"));
         Pixmap pixmapP = new Pixmap(110, 100, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
@@ -63,10 +63,8 @@ public class MenuState extends State{
                 Gdx.app.exit();
             }
         }
-        //System.out.println("Posicion x "+Gdx.input.getX());
-        //System.out.println("Posicion y "+Gdx.input.getY());
-        //System.out.println(playBtn.getWidth());
-        //System.out.println(Gdx.input.getX(playBtn.getHeight()));
+        //System.out.println(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
     }
 
     @Override
