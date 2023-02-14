@@ -19,6 +19,7 @@ public class PlayState extends State{
     private static final int bottle_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
+    float timeState=0f;
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
@@ -69,25 +70,45 @@ public class PlayState extends State{
             if (bottle.scoreCollides(fish.getBounds())){
                 score++;
                 //System.out.println(score);
-                if (score%20==0) {
+                /*if (score%20==0) {
                     //Gdx.app.log("Score", String.valueOf(score/21));
                     score = score/20;
                     totalscore++;
-                }
+                }*/
+                //System.out.println(fish.getPosition().x);
+                /*if((fish.getPosition().x-145)%20==0){
+                    totalscore++;
+                }*/
+
             }
             if (bottle.collides(fish.getBounds())){
+                Gdx.input.vibrate(1000);
                 gsm.set(new GameOver(gsm));
                 //arrayScore.add(totalscore);
                 //Collections.sort(arrayScore);
                 //System.out.println(arrayScore);
                 //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
+
+            if (bottle.getPosTopBottle().y >=(Gdx.graphics.getHeight()*0.72083)){
+                bottle.setGravityT(-1.0f);
+            }
+
+
+            if (bottle.getPosTopBottle().y <= 0){
+                bottle.setGravityT(1.0f);
+            }
+
+            bottle.update(dt);
+
+            System.out.println(bottle.getGRAVITY());
         }
+
 
         //TRABAJAR SOBRE ESTE CON LA BASE DE DATOS
         if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
             gsm.set(new GameOver(gsm));
-            Gdx.app.log("Total Score", String.valueOf(totalscore));
+            //Gdx.app.log("Total Score", String.valueOf(totalscore));
 
             totalscore = 0;
 
@@ -110,6 +131,16 @@ public class PlayState extends State{
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
+
+        timeState+=Gdx.graphics.getDeltaTime();
+        if(timeState>=1.34f && totalscore==0){
+            timeState=0f;
+            totalscore++;
+        }
+        if(timeState>=1.80f){
+            timeState=0f;
+            totalscore++;
+        }
     }
 
     @Override

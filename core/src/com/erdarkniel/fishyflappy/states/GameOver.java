@@ -12,7 +12,7 @@ import com.erdarkniel.fishyflappy.sprites.Animation;
 
 public class GameOver extends State{
     private final int MENUXLEFT=115,MENUXRIGHT=959,MENUYUP=1342,MENUYDOWN=1555;
-    private Texture bg,gotomenubtn,game_over, newbest;
+    private Texture bg,playagain,game_over, newbest;
     BitmapFont puntuacion;
     BitmapFont hs;
     private int highScore=0;
@@ -43,7 +43,7 @@ public class GameOver extends State{
 
         }
 
-        Pixmap pixmapGT = new Pixmap(Gdx.files.internal("go-to-menu-btn.png"));
+        Pixmap pixmapGT = new Pixmap(Gdx.files.internal("playagain.png"));
         Pixmap pixmapPT = new Pixmap(300, 440, pixmapGT.getFormat());
         pixmapPT.drawPixmap(pixmapGT,
                 0, 0, pixmapGT.getWidth(), pixmapGT.getHeight(),
@@ -62,7 +62,7 @@ public class GameOver extends State{
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()
         );
         bg = new Texture("bg.png");
-        gotomenubtn = new Texture(pixmapPT);
+        playagain = new Texture(pixmapPT);
         game_over = new Texture(pixmapP);
 
         Pixmap pixmapGNB = new Pixmap(Gdx.files.internal("new best.png"));
@@ -90,7 +90,7 @@ public class GameOver extends State{
             if (Gdx.input.justTouched()){
                 PlayState.totalscore=0;
                 show = false;
-                gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
+                gsm.set(new PlayState(gsm));//Devuelve al jugador al MenuState
             }
         }
         //System.out.println(Gdx.input.getY()+""+camera.position.x);
@@ -115,7 +115,7 @@ public class GameOver extends State{
         spriteBatch.begin();
         //playState.puntuacion.draw(spriteBatch, String.valueOf(playState.totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
-        spriteBatch.draw(gotomenubtn,camera.position.x - gotomenubtn.getWidth()/2,camera.position.y - gotomenubtn.getHeight()+120);
+        spriteBatch.draw(playagain,camera.position.x - playagain.getWidth()/2,camera.position.y - playagain.getHeight()+120);
         spriteBatch.draw(game_over,-16,-50);
         if(show)
         spriteBatch.draw(getNewBest(), -16,-50);
@@ -129,7 +129,7 @@ public class GameOver extends State{
     @Override
     public void dispose() {
         bg.dispose();
-        gotomenubtn.dispose();
+        playagain.dispose();
     }
 
     public TextureRegion getNewBest() {return nbanim.getFrame();}
