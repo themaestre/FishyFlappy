@@ -3,6 +3,7 @@ package com.erdarkniel.fishyflappy.states;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,14 +23,20 @@ public class PlayState extends State{
     private Texture bg,ground;
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
-
     //Puntuacion
-    //ArrayList<Integer> arrayScore = new ArrayList<Integer>();
-    /*private*/BitmapFont puntuacion;
+    BitmapFont puntuacion;
     int score = 0;
     static int totalscore=0;
     //Musica del juego
     private Music music;
+    //Pausa
+    private boolean pause = false;
+    public boolean isPause() {
+        return pause;
+    }
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
         fish = new Fish(50,320);
@@ -47,54 +54,57 @@ public class PlayState extends State{
             bottles.add(new Bottle(i * (bottle_SPACING + Bottle.BOTTLE_WIDTH)));
         }
     }
-
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()){
             fish.jump();
         }
     }
-
     @Override
     public void update(float dt) {
-        handleInput();
-        updateGround();
-        fish.update(dt);
-        camera.position.x = fish.getPosition().x + 80;
-        for (int i = 0;i<bottles.size;i++){
-            Bottle bottle = bottles.get(i);
-            if (camera.position.x - (camera.viewportWidth/2) > bottle.getPosTopBottle().x + bottle.getTopBottle().getWidth()){
-                bottle.reposition(bottle.getPosTopBottle().x + ((Bottle.BOTTLE_WIDTH + bottle_SPACING) * bottle_COUNT));
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            setPause(true);
+            //System.out.println("Pausando el juego");
+            if (isPause()==true){
+                //System.out.println("El juego esta en pausa");
             }
-            if (bottle.scoreCollides(fish.getBounds())){
-                score++;
-                //System.out.println(score);
-                if (score%20==0) {
-                    //Gdx.app.log("Score", String.valueOf(score/21));
-                    score = score/20;
-                    totalscore++;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.B)){
+            setPause(false);
+        }
+        if (isPause()==false){
+            //System.out.println("El juego corriendo");
+            handleInput();
+            updateGround();
+            fish.update(dt);
+            camera.position.x = fish.getPosition().x + 80;
+            for (int i = 0;i<bottles.size;i++){
+                Bottle bottle = bottles.get(i);
+                if (camera.position.x - (camera.viewportWidth/2) > bottle.getPosTopBottle().x + bottle.getTopBottle().getWidth()){
+                    bottle.reposition(bottle.getPosTopBottle().x + ((Bottle.BOTTLE_WIDTH + bottle_SPACING) * bottle_COUNT));
+                }
+                if (bottle.scoreCollides(fish.getBounds())){
+                    score++;
+                    //System.out.println(score);
+                    if (score%20==0) {
+                        //Gdx.app.log("Score", String.valueOf(score/21));
+                        score = score/20;
+                        totalscore++;
+                    }
+                }
+                if (bottle.collides(fish.getBounds())){
+                    gsm.set(new GameOver(gsm));
+                    //Gdx.app.log("Total Score", String.valueOf(totalscore));
                 }
             }
-            if (bottle.collides(fish.getBounds())){
+            //TRABAJAR SOBRE ESTE CON LA BASE DE DATOS
+            if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
                 gsm.set(new GameOver(gsm));
-                //arrayScore.add(totalscore);
-                //Collections.sort(arrayScore);
-                //System.out.println(arrayScore);
                 //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
+            camera.update();
         }
-
-        //TRABAJAR SOBRE ESTE CON LA BASE DE DATOS
-        if (fish.getPosition().y <= ground.getHeight()+GROUND_Y_OFFSET){
-            gsm.set(new GameOver(gsm));
-            Gdx.app.log("Total Score", String.valueOf(totalscore));
-
-            totalscore = 0;
-
-        }
-        camera.update();
     }
-
     @Override
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.setProjectionMatrix(camera.combined);
@@ -111,7 +121,6 @@ public class PlayState extends State{
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
     }
-
     @Override
     public void dispose() {
         bg.dispose();
@@ -138,15 +147,7 @@ public class PlayState extends State{
         music.setVolume(0.1f);
         music.play();
     }
-    /*public int getTotalscore(){
-        arrayScore.add(totalscore);
-        Collections.sort(arrayScore);
-        return totalscore;
-    }*/
     public static int getTotalScore(){
-
         return totalscore;
     }
-
-
 }

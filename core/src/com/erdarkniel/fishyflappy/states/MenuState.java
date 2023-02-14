@@ -9,8 +9,14 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import jdk.internal.org.jline.utils.Display;
 
 public class MenuState extends State{
-    private final int PLAYXLEFT=(int)(Gdx.graphics.getWidth()/2.8),PLAYXRIGHT=(int)(Gdx.graphics.getWidth()-Gdx.graphics.getWidth()/2.8),PLAYYUP=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/2),PLAYYDOWN=(int)(Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/4.407);
-    private final int EXITXLEFT=(int)(Gdx.graphics.getWidth()*0.165),EXITXRIGHT=(int)(Gdx.graphics.getWidth()*0.83981),EXITYUP=(int)(Gdx.graphics.getHeight()*0.8522),EXITYDOWN=(int)(Gdx.graphics.getHeight()*0.98606);
+    private final int PLAYXLEFT=Gdx.graphics.getWidth()/48*13;//3
+    private final int PLAYXRIGHT=Gdx.graphics.getWidth()/48*35;
+    private final int PLAYYUP=Gdx.graphics.getHeight()/2;
+    private final int PLAYYDOWN=Gdx.graphics.getHeight()/9*7;
+    private final int EXITXLEFT=Gdx.graphics.getWidth()/6;
+    private final int EXITXRIGHT=Gdx.graphics.getWidth()/6*5;
+    private final int EXITYUP=Gdx.graphics.getHeight()/6*5;
+    private final int EXITYDOWN=Gdx.graphics.getHeight()-20;
     private Texture bg,playBtn,title,fish,exit;
     public MenuState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -64,7 +70,9 @@ public class MenuState extends State{
             }
         }
         //System.out.println(Gdx.graphics.getWidth());
-        System.out.println(Gdx.graphics.getHeight());
+        //System.out.println(Gdx.graphics.getHeight());
+        //System.out.println(Gdx.input.getX());
+        //System.out.println(Gdx.input.getY());
     }
 
     @Override
