@@ -9,7 +9,7 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import jdk.internal.org.jline.utils.Display;
 
 public class MenuState extends State{
-    private final int PLAYXLEFT=Gdx.graphics.getWidth()/48*13;//3
+    private final int PLAYXLEFT=Gdx.graphics.getWidth()/48*13;//formula getX * x=480
     private final int PLAYXRIGHT=Gdx.graphics.getWidth()/48*35;
     private final int PLAYYUP=Gdx.graphics.getHeight()/2;
     private final int PLAYYDOWN=Gdx.graphics.getHeight()/9*7;
@@ -22,7 +22,6 @@ public class MenuState extends State{
         super(gameStateManager);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
-
         Pixmap pixmapGT = new Pixmap(Gdx.files.internal("main_logo.png"));
         Pixmap pixmapPT = new Pixmap(340, 150, pixmapGT.getFormat());
         pixmapPT.drawPixmap(pixmapGT,
@@ -69,10 +68,14 @@ public class MenuState extends State{
                 Gdx.app.exit();
             }
         }
+        //System.out.println(camera.position.x - playBtn.getWidth()/2);//65
+        //System.out.println(camera.position.y - playBtn.getHeight());//80
         //System.out.println(Gdx.graphics.getWidth());
         //System.out.println(Gdx.graphics.getHeight());
         //System.out.println(Gdx.input.getX());
         //System.out.println(Gdx.input.getY());
+        //System.out.println(camera.position.x);//120
+        //System.out.println(camera.position.y);//180
     }
 
     @Override

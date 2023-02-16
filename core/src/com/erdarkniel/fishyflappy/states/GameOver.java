@@ -11,10 +11,14 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import com.erdarkniel.fishyflappy.sprites.Animation;
 
 public class GameOver extends State{
-    private final int MENUXLEFT=115;
-    private final int MENUXRIGHT=365;
-    private final int MENUYUP=645;
-    private final int MENUYDOWN=705;
+    private final int MENUXLEFT=Gdx.graphics.getWidth()/48*5;//50
+    private final int MENUXRIGHT=Gdx.graphics.getWidth()/8*7;
+    private final int MENUYUP=Gdx.graphics.getHeight()/6*5;
+    private final int MENUYDOWN=Gdx.graphics.getHeight()-20;
+    private final int AGAINXLEFT=Gdx.graphics.getWidth()/48*5;
+    private final int AGAINXRIGHT=Gdx.graphics.getWidth()/8*7;
+    private final int AGAINYUP=Gdx.graphics.getHeight()/36*25;
+    private final int AGAINYDOWN=Gdx.graphics.getHeight()/36*29;
     private Texture bg,gotomenubtn,game_over, newbest,playagain;
     BitmapFont puntuacion;
     BitmapFont hs;
@@ -80,6 +84,12 @@ public class GameOver extends State{
                 PlayState.totalscore=0;
                 show = false;
                 gsm.set(new MenuState(gsm));//Devuelve al jugador al MenuState
+            }
+        }
+        if (Gdx.input.getX()>=AGAINXLEFT&&Gdx.input.getX()<=AGAINXRIGHT&&
+                Gdx.input.getY()>=AGAINYUP&&Gdx.input.getY()<=AGAINYDOWN){
+            if (Gdx.input.justTouched()){
+                gsm.set(new PlayState(gsm));//Devuelve al jugador al MenuState
             }
         }
     }
