@@ -25,9 +25,9 @@ public class PlayState extends State{
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
     //Puntuacion
-    BitmapFont puntuacion;
-    int score = 0;
-    static int totalscore=0;
+    private BitmapFont puntuacion;
+    private int score = 0;
+    protected static int totalscore=0;
     //Musica del juego
     private Music music;
     //Pausa
@@ -147,9 +147,6 @@ public class PlayState extends State{
         spriteBatch.begin();
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
         spriteBatch.draw(fish.getFish(), fish.getPosition().x, fish.getPosition().y);
-        if (isPause()==false){
-            spriteBatch.draw(pauseBtn,camera.position.x - pauseBtn.getWidth()*4,camera.position.y + pauseBtn.getHeight()*6);
-        }
         for (Bottle bottle : bottles){
             spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
@@ -164,6 +161,9 @@ public class PlayState extends State{
                     setPause(false);
                 }
             }
+        }
+        if (isPause()==false){
+            spriteBatch.draw(pauseBtn,camera.position.x - pauseBtn.getWidth()*4,camera.position.y + pauseBtn.getHeight()*6);
         }
         puntuacion.draw(spriteBatch, String.valueOf(totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);

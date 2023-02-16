@@ -20,12 +20,10 @@ public class GameOver extends State{
     private final int AGAINYUP=Gdx.graphics.getHeight()/36*25;
     private final int AGAINYDOWN=Gdx.graphics.getHeight()/36*29;
     private Texture bg,gotomenubtn,game_over, newbest,playagain;
-    BitmapFont puntuacion;
-    BitmapFont hs;
-    private int highScore=0;
-    Animation nbanim;
-    Preferences prefs = Gdx.app.getPreferences("game preferences");
-    int score;
+    private BitmapFont puntuacion,hs;
+    private Animation nbanim;
+    private Preferences prefs = Gdx.app.getPreferences("game preferences");
+    private int score;
     private boolean show = false;
     public GameOver(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -41,7 +39,6 @@ public class GameOver extends State{
             show = true;
             prefs.putInteger("highscore", PlayState.totalscore);
             prefs.flush();
-            highScore = PlayState.totalscore;
         }
         Pixmap pixmapGT = new Pixmap(Gdx.files.internal("go-to-menu-btn.png"));
         Pixmap pixmapPT = new Pixmap(300, 440, pixmapGT.getFormat());
@@ -89,6 +86,8 @@ public class GameOver extends State{
         if (Gdx.input.getX()>=AGAINXLEFT&&Gdx.input.getX()<=AGAINXRIGHT&&
                 Gdx.input.getY()>=AGAINYUP&&Gdx.input.getY()<=AGAINYDOWN){
             if (Gdx.input.justTouched()){
+                PlayState.totalscore=0;
+                show = false;
                 gsm.set(new PlayState(gsm));//Devuelve al jugador al MenuState
             }
         }
