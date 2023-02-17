@@ -15,7 +15,7 @@ import com.erdarkniel.fishyflappy.sprites.Bottle;
 import com.erdarkniel.fishyflappy.sprites.Fish;
 
 public class PlayState extends State{
-    private static final int bottle_SPACING = 80;
+    private static final int bottle_SPACING = 125;
     private static final int bottle_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
@@ -90,25 +90,25 @@ public class PlayState extends State{
                 //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
 
-            if (bottle.getPosTopBottle().y >=309.76846){
-                bottle.setGravityTop(-1.0f);
+            if (bottle.getPosTopBottle().y >=275){
+                bottle.setGravityTop(-1f);
             }
-            if (bottle.getPosTopBottle().y <=200 ){
-                bottle.setGravityTop(1.0f);
+            if (bottle.getPosTopBottle().y <=150 ){
+                bottle.setGravityTop(1f);
             }
         //------------------------------------
-            if (bottle.getposBotBottle().y <=50 ){
-                bottle.setGravityBot(1.0f);
+            if (bottle.getposBotBottle().y <=100 ){
+                bottle.setGravityBot(1.3f);
             }
 
-            if (bottle.getposBotBottle().y >=250){
-                bottle.setGravityBot(-1.0f);
+            if (bottle.getposBotBottle().y >=200){
+                bottle.setGravityBot(-1.3f);
             }
 
 
             bottle.update(dt);
 
-            System.out.println(bottle.getposBotBottle().y);
+            System.out.println(fish.getPosition());
         }
 
 
@@ -120,7 +120,16 @@ public class PlayState extends State{
             totalscore = 0;
 
         }
+
+        if (fish.getPosition().y >= 375){
+            gsm.set(new GameOver(gsm));
+            //Gdx.app.log("Total Score", String.valueOf(totalscore));
+
+            totalscore = 0;
+
+        }
         camera.update();
+
     }
 
     @Override
