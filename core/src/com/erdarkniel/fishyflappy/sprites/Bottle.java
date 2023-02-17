@@ -16,14 +16,16 @@ public class Bottle {
     private static final int FLUCTUATION = 130;
     private static final int BOTTLE_GAP = 100;
     private static final int LOWEST_OPENING = 120;
-    public static float GRAVITY = -1.3f;
-    private Vector3 velocity;
+    public static float GRAVITYTOP = -1.3f;
+    public static float GRAVITYBOT = 1.3f;
+    private Vector3 velocityTOP, velocityBOT;
     private Texture topBottle,bottomBottle,square;
     private Vector2 posTopBottle,posBotBottle,posSquare;
     private Random rand;
     private Rectangle boundsTop,boundsBot,boundsSquare;
     public Bottle(float x){
-        velocity = new Vector3(0,0,0);
+        velocityTOP = new Vector3(0,0,0);
+        velocityBOT = new Vector3(0,0,0);
 
         Pixmap pixmapG = new Pixmap(Gdx.files.internal("topbottle.png"));
         Pixmap pixmapP = new Pixmap(20, 57, pixmapG.getFormat());
@@ -33,7 +35,7 @@ public class Bottle {
         );
 
         topBottle = new Texture(pixmapP);
-        bottomBottle = new Texture("bottombottle.png");
+        bottomBottle = new Texture(pixmapP);
         square = new Texture("square.png");
         //posicion boyella y puntuacion
         rand = new Random();
@@ -105,22 +107,43 @@ public class Bottle {
 
     public void update(float dt){
         if (posTopBottle.y > 0){
-            velocity.add(0,GRAVITY,0);
+            velocityTOP.add(0,GRAVITYTOP,0);
         }
-        velocity.scl(dt);
-        posTopBottle.add(MOVEMENT*dt,velocity.y);
+        if (posBotBottle.y > 0){
+            velocityBOT.add(0,GRAVITYBOT,0);
+        }
+        velocityTOP.scl(dt);
+        velocityBOT.scl(dt);
+        posBotBottle.add(MOVEMENT*dt,velocityBOT.y);
+        posTopBottle.add(MOVEMENT*dt,velocityTOP.y);
         if (posTopBottle.y < 0){
             posTopBottle.y = 0;
+            velocityTOP.y = 0;
         }
-        velocity.scl(1/dt);
+        if (posBotBottle.y < 0){
+            posBotBottle.y = 0;
+            velocityBOT.y = 0;
+        }
+        velocityTOP.scl(1/dt);
+        velocityBOT.scl(1/dt);
+        boundsBot.setPosition(posBotBottle.x,posBotBottle.y);
         boundsTop.setPosition(posTopBottle.x,posTopBottle.y);
+
     }
 
-    public void setGravityT(float gravityt){
-        GRAVITY = gravityt;
+    public void setGravityTop(float gravityt){
+        GRAVITYTOP = gravityt;
     }
 
-    public float getGRAVITY(){
-        return GRAVITY;
+    public float getGRAVITYTop(){
+        return GRAVITYTOP;
+    }
+
+    public void setGravityBot(float gravityt){
+        GRAVITYBOT = gravityt;
+    }
+
+    public float getGRAVITYBot(){
+        return GRAVITYBOT;
     }
 }
