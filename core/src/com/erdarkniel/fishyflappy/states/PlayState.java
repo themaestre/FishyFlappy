@@ -217,8 +217,9 @@ public class PlayState extends State{
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
 
-        timeState+=Gdx.graphics.getDeltaTime();
+
         if(isPause()==false) {
+            timeState+=Gdx.graphics.getDeltaTime();
             if (timeState >= 1.34f && totalscore == 0) {
                 timeState = 0f;
                 totalscore++;
