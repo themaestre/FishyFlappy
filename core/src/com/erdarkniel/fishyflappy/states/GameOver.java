@@ -11,7 +11,7 @@ import com.erdarkniel.fishyflappy.FishyFlappy;
 import com.erdarkniel.fishyflappy.sprites.Animation;
 
 public class GameOver extends State{
-    private final int MENUXLEFT=115,MENUXRIGHT=959,MENUYUP=1342,MENUYDOWN=1555;
+    private final int MENUXLEFT=(int)(Gdx.graphics.getWidth()*0.10648),MENUXRIGHT=(int)(Gdx.graphics.getWidth()*0.8879),MENUYUP=(int)(Gdx.graphics.getHeight()*0.748049),MENUYDOWN=(int)(Gdx.graphics.getHeight()*0.86677);
     private Texture bg,playagain,game_over, newbest;
     BitmapFont puntuacion;
     BitmapFont hs;

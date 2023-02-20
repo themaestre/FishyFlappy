@@ -3,8 +3,10 @@ package com.erdarkniel.fishyflappy.states;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,10 +22,25 @@ public class PlayState extends State{
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
     float timeState=0f;
-    private Texture bg,ground;
+    private Texture bg,ground, pauseBtn,pauseScreen,resumeBtn;
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
-
+    //Pausa
+    private boolean pause = false;
+    private final int RESUMEXLEFT=Gdx.graphics.getWidth()/6;//80
+    private final int RESUMEXRIGHT=Gdx.graphics.getWidth()/24*19;//380
+    private final int RESUMEYUP=Gdx.graphics.getHeight()/18*7;//280
+    private final int RESUMEYDOWN=Gdx.graphics.getHeight()/24*13;//390
+    private final int PAUSEXLEFT=Gdx.graphics.getWidth()/12;//40
+    private final int PAUSEXRIGHT=Gdx.graphics.getWidth()/16*3;//90
+    private final int PAUSEYUP=Gdx.graphics.getHeight()/72;//10
+    private final int PAUSEYDOWN=Gdx.graphics.getHeight()/12;//60
+    public boolean isPause() {
+        return pause;
+    }
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
     //Puntuacion
     //ArrayList<Integer> arrayScore = new ArrayList<Integer>();
     /*private*/BitmapFont puntuacion;
@@ -36,6 +53,27 @@ public class PlayState extends State{
         fish = new Fish(50,320);
         camera.setToOrtho(false, FishyFlappy.WIDTH/2, FishyFlappy.HEIGHT/2);
         bg = new Texture("bg.png");
+        Pixmap pixmapG = new Pixmap(Gdx.files.internal("pauseScreen.png"));
+        Pixmap pixmapP = new Pixmap(270, 450, pixmapG.getFormat());
+        pixmapP.drawPixmap(pixmapG,
+                0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
+                0, 0, pixmapP.getWidth(), pixmapP.getHeight()
+        );
+        Pixmap pixmapGR = new Pixmap(Gdx.files.internal("resume.png"));
+        Pixmap pixmapPR = new Pixmap(200, 440, pixmapGR.getFormat());
+        pixmapPR.drawPixmap(pixmapGR,
+                0, 0, pixmapGR.getWidth(), pixmapGR.getHeight(),
+                0, 0, pixmapPR.getWidth(), pixmapPR.getHeight()
+        );
+        Pixmap pixmapGB = new Pixmap(Gdx.files.internal("button_pause.png"));
+        Pixmap pixmapPB = new Pixmap(25, 25, pixmapGB.getFormat());
+        pixmapPB.drawPixmap(pixmapGB,
+                0, 0, pixmapGB.getWidth(), pixmapGB.getHeight(),
+                0, 0, pixmapPB.getWidth(), pixmapPB.getHeight()
+        );
+        pauseBtn = new Texture(pixmapPB);
+        pauseScreen = new Texture(pixmapP);
+        resumeBtn = new Texture(pixmapPR);
         puntuacion = new BitmapFont();
         puntuacion.setColor(Color.BLACK);
         puntuacion.getData().setScale(2);
@@ -58,6 +96,23 @@ public class PlayState extends State{
 
     @Override
     public void update(float dt) {
+        if (Gdx.input.getX()>=PAUSEXLEFT&&Gdx.input.getX()<=PAUSEXRIGHT&&
+                Gdx.input.getY()>=PAUSEYUP&&Gdx.input.getY()<=PAUSEYDOWN){
+            if (Gdx.input.justTouched()){
+                setPause(true);
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){//Pausar con tecla A
+            setPause(true);
+            //System.out.println("Pausando el juego");
+            if (isPause()==true){
+                //System.out.println("El juego esta en pausa");
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.B)){//Reanudae con tecla B
+            setPause(false);
+        }
+        if (isPause()==false){
         handleInput();
         updateGround();
         fish.update(dt);
@@ -131,6 +186,7 @@ public class PlayState extends State{
         camera.update();
 
     }
+    }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
@@ -143,19 +199,34 @@ public class PlayState extends State{
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
             spriteBatch.draw(bottle.getSquare(),bottle.getPosSquare().x,bottle.getPosSquare().y);
         }
+        if (isPause()==true){
+            spriteBatch.draw(pauseScreen,camera.position.x - pauseScreen.getWidth()/2,camera.position.y - pauseScreen.getHeight()/2);
+            spriteBatch.draw(resumeBtn,camera.position.x - resumeBtn.getWidth()/2,camera.position.y - resumeBtn.getHeight()/2);
+            if (Gdx.input.getX()>=RESUMEXLEFT&&Gdx.input.getX()<=RESUMEXRIGHT&&
+                    Gdx.input.getY()>=RESUMEYUP&&Gdx.input.getY()<=RESUMEYDOWN){
+                if (Gdx.input.justTouched()){
+                    setPause(false);
+                }
+            }
+        }
+        if (isPause()==false){
+            spriteBatch.draw(pauseBtn,camera.position.x - pauseBtn.getWidth()*4,camera.position.y + pauseBtn.getHeight()*6);
+        }
         puntuacion.draw(spriteBatch, String.valueOf(totalscore),camera.position.x-(camera.viewportWidth/bg.getWidth()), camera.position.y+(camera.viewportHeight/2));
         spriteBatch.draw(ground,groundPos1.x,groundPos1.y);
         spriteBatch.draw(ground,groundPos2.x,groundPos2.y);
         spriteBatch.end();
 
         timeState+=Gdx.graphics.getDeltaTime();
-        if(timeState>=1.34f && totalscore==0){
-            timeState=0f;
-            totalscore++;
-        }
-        if(timeState>=1.80f){
-            timeState=0f;
-            totalscore++;
+        if(isPause()==false) {
+            if (timeState >= 1.34f && totalscore == 0) {
+                timeState = 0f;
+                totalscore++;
+            }
+            if (timeState >= 1.93f) {
+                timeState = 0f;
+                totalscore++;
+            }
         }
     }
 
