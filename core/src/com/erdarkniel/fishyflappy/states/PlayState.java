@@ -22,15 +22,21 @@ public class PlayState extends State{
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
     float timeState=0f;
-    private Texture bg,ground, pauseBtn,pauseScreen,resumeBtn;
+    private Texture bg,ground, pauseBtn,pauseScreen,resumeBtn, restart;
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
     //Pausa
     private boolean pause = false;
     private final int RESUMEXLEFT=(int)(Gdx.graphics.getWidth()*0.1222);
     private final int RESUMEXRIGHT=(int)(Gdx.graphics.getWidth()*0.8833);
-    private final int RESUMEYUP=(int)(Gdx.graphics.getHeight()*0.5066);
-    private final int RESUMEYDOWN=(int)(Gdx.graphics.getHeight()*0.6404);
+    private final int RESUMEYUP=(int)(Gdx.graphics.getHeight()*0.2831);
+    private final int RESUMEYDOWN=(int)(Gdx.graphics.getHeight()*0.4367);
+
+    private final int RESTARTXLEFT=(int)(Gdx.graphics.getWidth()*0.1972);
+    private final int RESTARTXRIGHT=(int)(Gdx.graphics.getWidth()*0.4703);
+    private final int RESTARTYUP=(int)(Gdx.graphics.getHeight()*0.5066);
+    private final int RESTARTYDOWN=(int)(Gdx.graphics.getHeight()*0.6404);
+
     private final int PAUSEXLEFT=Gdx.graphics.getWidth()/12;//40
     private final int PAUSEXRIGHT=Gdx.graphics.getWidth()/16*3;//90
     private final int PAUSEYUP=Gdx.graphics.getHeight()/72;//10
@@ -71,6 +77,13 @@ public class PlayState extends State{
                 0, 0, pixmapGB.getWidth(), pixmapGB.getHeight(),
                 0, 0, pixmapPB.getWidth(), pixmapPB.getHeight()
         );
+        Pixmap pixmapGRes = new Pixmap(Gdx.files.internal("reload_button.png"));
+        Pixmap pixmapPRes = new Pixmap(75, 75, pixmapGRes.getFormat());
+        pixmapPRes.drawPixmap(pixmapGRes,
+                0, 0, pixmapGRes.getWidth(), pixmapGRes.getHeight(),
+                0, 0, pixmapPRes.getWidth(), pixmapPRes.getHeight()
+        );
+        restart = new Texture(pixmapPRes);
         pauseBtn = new Texture(pixmapPB);
         pauseScreen = new Texture(pixmapP);
         resumeBtn = new Texture(pixmapPR);
@@ -202,11 +215,18 @@ public class PlayState extends State{
         if (isPause()==true){
             spriteBatch.draw(pauseScreen,camera.position.x - pauseScreen.getWidth()/2,camera.position.y - pauseScreen.getHeight()/2);
             spriteBatch.draw(resumeBtn,camera.position.x - resumeBtn.getWidth()/2+6,camera.position.y - resumeBtn.getHeight()/2-40);
-            //System.out.println("Posicion y "+Gdx.input.getY());
+            spriteBatch.draw(restart,camera.position.x - restart.getWidth()/2-40,camera.position.y - restart.getHeight()/2+45);
+            System.out.println("Posicion x "+Gdx.input.getX());
             if (Gdx.input.getX()>=RESUMEXLEFT&&Gdx.input.getX()<=RESUMEXRIGHT&&
                     Gdx.input.getY()>=RESUMEYUP&&Gdx.input.getY()<=RESUMEYDOWN){
                 if (Gdx.input.justTouched()){
-                    setPause(false);
+                   setPause(false);
+                }
+            }
+            if (Gdx.input.getX()>=RESTARTXLEFT&&Gdx.input.getX()<=RESTARTXRIGHT&&
+                    Gdx.input.getY()>=RESTARTYUP&&Gdx.input.getY()<=RESTARTYDOWN){
+                if (Gdx.input.justTouched()){
+                    gsm.set(new PlayState(gsm));
                 }
             }
         }
