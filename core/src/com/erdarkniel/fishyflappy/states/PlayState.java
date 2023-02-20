@@ -1,7 +1,4 @@
 package com.erdarkniel.fishyflappy.states;
-
-
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
@@ -123,7 +120,7 @@ public class PlayState extends State{
                     score++;
                     //System.out.println(score);
                     if (score%20==0) {
-                        //Gdx.app.log("Score", String.valueOf(score/21));
+                        //Gdx.app.log("Score", String.valueOf(score/20));
                         score = score/20;
                         totalscore++;
                     }
