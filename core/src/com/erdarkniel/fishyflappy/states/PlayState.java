@@ -27,10 +27,10 @@ public class PlayState extends State{
     private Array<Bottle> bottles;
     //Pausa
     private boolean pause = false;
-    private final int RESUMEXLEFT=Gdx.graphics.getWidth()/6;//80
-    private final int RESUMEXRIGHT=Gdx.graphics.getWidth()/24*19;//380
-    private final int RESUMEYUP=Gdx.graphics.getHeight()/18*7;//280
-    private final int RESUMEYDOWN=Gdx.graphics.getHeight()/24*13;//390
+    private final int RESUMEXLEFT=(int)(Gdx.graphics.getWidth()*0.1222);
+    private final int RESUMEXRIGHT=(int)(Gdx.graphics.getWidth()*0.8833);
+    private final int RESUMEYUP=(int)(Gdx.graphics.getHeight()*0.5066);
+    private final int RESUMEYDOWN=(int)(Gdx.graphics.getHeight()*0.6404);
     private final int PAUSEXLEFT=Gdx.graphics.getWidth()/12;//40
     private final int PAUSEXRIGHT=Gdx.graphics.getWidth()/16*3;//90
     private final int PAUSEYUP=Gdx.graphics.getHeight()/72;//10
@@ -60,7 +60,7 @@ public class PlayState extends State{
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()
         );
         Pixmap pixmapGR = new Pixmap(Gdx.files.internal("resume.png"));
-        Pixmap pixmapPR = new Pixmap(200, 440, pixmapGR.getFormat());
+        Pixmap pixmapPR = new Pixmap(250, 440, pixmapGR.getFormat());
         pixmapPR.drawPixmap(pixmapGR,
                 0, 0, pixmapGR.getWidth(), pixmapGR.getHeight(),
                 0, 0, pixmapPR.getWidth(), pixmapPR.getHeight()
@@ -201,7 +201,8 @@ public class PlayState extends State{
         }
         if (isPause()==true){
             spriteBatch.draw(pauseScreen,camera.position.x - pauseScreen.getWidth()/2,camera.position.y - pauseScreen.getHeight()/2);
-            spriteBatch.draw(resumeBtn,camera.position.x - resumeBtn.getWidth()/2,camera.position.y - resumeBtn.getHeight()/2);
+            spriteBatch.draw(resumeBtn,camera.position.x - resumeBtn.getWidth()/2+6,camera.position.y - resumeBtn.getHeight()/2-40);
+            //System.out.println("Posicion y "+Gdx.input.getY());
             if (Gdx.input.getX()>=RESUMEXLEFT&&Gdx.input.getX()<=RESUMEXRIGHT&&
                     Gdx.input.getY()>=RESUMEYUP&&Gdx.input.getY()<=RESUMEYDOWN){
                 if (Gdx.input.justTouched()){
