@@ -10,12 +10,12 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.Random;
 
 public class Cap {
-    public static final int CAP_WIDTH = 50;
+    public static final int CAP_WIDTH = 52;
     private static final int MOVEMENT = 10;
-    private static final int FLUCTUATION = 100;
-    private static final int CAP_GAP = 50;
-    private static final int LOWEST_OPENING = 200;
-    public static float GRAVITY = 0.2f;
+    private static final int FLUCTUATION = 130;
+    private static final int CAP_GAP = 100;
+    private static final int LOWEST_OPENING = 120;
+    public static float GRAVITY = -2f;
     private Vector3 velocity;
     private Texture cap;
     private Vector2 posCapBottle;
@@ -25,8 +25,8 @@ public class Cap {
     public Cap(float x){
         velocity = new Vector3(0,0,0);
 
-        Pixmap pixmapG = new Pixmap(Gdx.files.internal("square.png"));
-        Pixmap pixmapP = new Pixmap(50, 30, pixmapG.getFormat());
+        Pixmap pixmapG = new Pixmap(Gdx.files.internal("cap.png"));
+        Pixmap pixmapP = new Pixmap(100, 50, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()

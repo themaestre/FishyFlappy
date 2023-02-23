@@ -96,6 +96,7 @@ public class PlayState extends State{
         groundPos1 = new Vector2(camera.position.x - camera.viewportWidth/2,GROUND_Y_OFFSET);
         groundPos2 = new Vector2((camera.position.x - camera.viewportWidth/2)+ground.getWidth(),GROUND_Y_OFFSET);
         bottles = new Array<Bottle>();
+        caps = new Array<Cap>();
         setUpMusic();
         for (int i = 1; i <= bottle_COUNT; i++) {
             bottles.add(new Bottle(i * (bottle_SPACING + Bottle.BOTTLE_WIDTH)));
@@ -227,11 +228,12 @@ public class PlayState extends State{
         spriteBatch.begin();
         spriteBatch.draw(bg,camera.position.x-(camera.viewportWidth/2),camera.position.y-(camera.viewportHeight/2));
         spriteBatch.draw(fish.getFish(), fish.getPosition().x, fish.getPosition().y);
-        for (Bottle bottle : bottles){
+       for (Bottle bottle : bottles){
             spriteBatch.draw(bottle.getTopBottle(),bottle.getPosTopBottle().x,bottle.getPosTopBottle().y);
             spriteBatch.draw(bottle.getBottomBottle(),bottle.getposBotBottle().x,bottle.getposBotBottle().y);
             spriteBatch.draw(bottle.getSquare(),bottle.getPosSquare().x,bottle.getPosSquare().y);
         }
+
         for (Cap cap : caps){
             spriteBatch.draw(cap.getCap(),cap.getPosCapBottle().x,cap.getPosCapBottle().y);
         }
@@ -304,11 +306,7 @@ public class PlayState extends State{
         music.setVolume(0.1f);
         music.play();
     }
-    /*public int getTotalscore(){
-        arrayScore.add(totalscore);
-        Collections.sort(arrayScore);
-        return totalscore;
-    }*/
+
     public static int getTotalScore(){
 
         return totalscore;
