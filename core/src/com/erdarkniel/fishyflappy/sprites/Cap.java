@@ -12,10 +12,10 @@ import java.util.Random;
 public class Cap {
     public static final int CAP_WIDTH = 52;
     private static final int MOVEMENT = 10;
-    private static final int FLUCTUATION = 130;
-    private static final int CAP_GAP = 100;
-    private static final int LOWEST_OPENING = 120;
-    public static float GRAVITY = -2f;
+    private static final int FLUCTUATION = 100;
+    private static final int CAP_GAP = 50;
+    private static final int LOWEST_OPENING = 150;
+    public static float GRAVITY = -0.7f;
     private Vector3 velocity;
     private Texture cap;
     private Vector2 posCapBottle;
@@ -26,7 +26,7 @@ public class Cap {
         velocity = new Vector3(0,0,0);
 
         Pixmap pixmapG = new Pixmap(Gdx.files.internal("cap.png"));
-        Pixmap pixmapP = new Pixmap(100, 50, pixmapG.getFormat());
+        Pixmap pixmapP = new Pixmap(16, 7, pixmapG.getFormat());
         pixmapP.drawPixmap(pixmapG,
                 0, 0, pixmapG.getWidth(), pixmapG.getHeight(),
                 0, 0, pixmapP.getWidth(), pixmapP.getHeight()
@@ -39,7 +39,7 @@ public class Cap {
         posCapBottle = new Vector2(x,rand.nextInt(FLUCTUATION)+CAP_GAP+LOWEST_OPENING);
 
         //colision
-        boundsCap = new Rectangle(boundsCap.x,boundsCap.y,cap.getWidth()-10,cap.getHeight());
+        boundsCap = new Rectangle(posCapBottle.x,posCapBottle.y,cap.getWidth()-10,cap.getHeight());
 
     }
 

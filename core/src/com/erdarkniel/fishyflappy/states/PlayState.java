@@ -19,7 +19,9 @@ import com.erdarkniel.fishyflappy.sprites.Fish;
 
 public class PlayState extends State{
     private static final int bottle_SPACING = 125;
+    private static final int CAP_SPACING = 100;
     private static final int bottle_COUNT = 4;
+    private static final int caps_COUNT = 5;
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
     float timeState=0f;
@@ -101,6 +103,10 @@ public class PlayState extends State{
         for (int i = 1; i <= bottle_COUNT; i++) {
             bottles.add(new Bottle(i * (bottle_SPACING + Bottle.BOTTLE_WIDTH)));
         }
+
+        for (int i = 1; i <= caps_COUNT; i++) {
+            caps.add(new Cap(i * (CAP_SPACING + Cap.CAP_WIDTH)));
+        }
     }
 
     @Override
@@ -138,27 +144,10 @@ public class PlayState extends State{
             if (camera.position.x - (camera.viewportWidth/2) > bottle.getPosTopBottle().x + bottle.getTopBottle().getWidth()){
                 bottle.reposition(bottle.getPosTopBottle().x + ((Bottle.BOTTLE_WIDTH + bottle_SPACING) * bottle_COUNT));
             }
-            if (bottle.scoreCollides(fish.getBounds())){
-                score++;
-                //System.out.println(score);
-                /*if (score%20==0) {
-                    //Gdx.app.log("Score", String.valueOf(score/21));
-                    score = score/20;
-                    totalscore++;
-                }*/
-                //System.out.println(fish.getPosition().x);
-                /*if((fish.getPosition().x-145)%20==0){
-                    totalscore++;
-                }*/
 
-            }
             if (bottle.collides(fish.getBounds())){
                 Gdx.input.vibrate(1000);
                 gsm.set(new GameOver(gsm));
-                //arrayScore.add(totalscore);
-                //Collections.sort(arrayScore);
-                //System.out.println(arrayScore);
-                //Gdx.app.log("Total Score", String.valueOf(totalscore));
             }
 
             if (bottle.getPosTopBottle().y >=275){
@@ -190,13 +179,14 @@ public class PlayState extends State{
                     gsm.set(new GameOver(gsm));
                 }
 
-                if (cap.getPosCapBottle().y >=170){
-                    cap.setGravity(-0.2f);
+                if (cap.getPosCapBottle().y >=300){
+                    cap.setGravity(-0.7f);
                 }
                 if (cap.getPosCapBottle().y <=150 ){
-                    cap.setGravity(0.2f);
+                    cap.setGravity(0.5f);
                 }
                 cap.update(dt);
+                System.out.println("CAP POS"+cap.getPosCapBottle());
 
             }
 

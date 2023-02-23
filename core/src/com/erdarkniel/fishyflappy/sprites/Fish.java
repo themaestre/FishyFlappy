@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Fish {
     private static final int MOVEMENT = 100;
-    private static final int GRAVITY = -20;
+    private static final int GRAVITY = -40;
     private Vector3 position;
     private Vector3 velocity;
     private Texture fish;
