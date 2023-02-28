@@ -18,10 +18,10 @@ import com.erdarkniel.fishyflappy.sprites.Cap;
 import com.erdarkniel.fishyflappy.sprites.Fish;
 
 public class PlayState extends State{
-    private static final int bottle_SPACING = 125;
-    private static final int CAP_SPACING = 100;
+    private static final int bottle_SPACING = 175;
+    private static final int CAP_SPACING = 130;
     private static final int bottle_COUNT = 4;
-    private static final int caps_COUNT = 5;
+    private static final int caps_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -30;
     private Fish fish;
     float timeState=0f;
@@ -229,11 +229,11 @@ public class PlayState extends State{
 
         if(isPause()==false) {
             timeState+=Gdx.graphics.getDeltaTime();
-            if (timeState >= 1.34f && totalscore == 0) {
+            if (timeState >= 1.80f && totalscore == 0) {
                 timeState = 0f;
                 totalscore++;
             }
-            if (timeState >= 1.93f) {
+            if (timeState >= 2.55f) {
                 timeState = 0f;
                 totalscore++;
             }
