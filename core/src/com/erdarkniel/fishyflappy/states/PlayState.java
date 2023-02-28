@@ -131,7 +131,7 @@ public class PlayState extends State{
             }
 
             if (bottle.collides(fish.getBounds())){
-                Gdx.input.vibrate(1000);
+                Gdx.input.vibrate(300);
                 gsm.set(new GameOver(gsm));
             }
 
@@ -158,7 +158,7 @@ public class PlayState extends State{
                     cap.reposition(cap.getPosCapBottle().x + ((Cap.CAP_WIDTH + bottle_SPACING) * bottle_COUNT));
                 }
                 if (cap.collides(fish.getBounds())){
-                    Gdx.input.vibrate(1000);
+                    Gdx.input.vibrate(300);
                     gsm.set(new GameOver(gsm));
                 }
 
