@@ -50,7 +50,7 @@ ya que los sprites utilizados y los realizados a mano no coincidían en tamaños
 Así que tuvimos que poner crear Pixmap para poder variar a nuestro gusto el tamaño de los sprites, y así poder utilizarlos. Esto
 lo podemos encontrar en el archivo [Fish](./core/src/com/erdarkniel/fishyflappy/sprites/Fish.java).
 
-## Progreso actual
+## Progreso anterior
 
 Actualmente el proyecto se encuentra como las imágenes mostradas a continuación.
 
