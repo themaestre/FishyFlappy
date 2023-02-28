@@ -147,4 +147,4 @@ y nos dió el siguiente resultado.
 Para la [Play Store](https://play.google.com/store/apps/details?id=com.erdarkniel.fishyflappy&hl=es_419&gl=US) decidimos crear un vídeo a modo de presentación de la app, y para convencer a la gente para descargarlo (hecho de un modo animado, debido a que, al ser un juego
 una presentación si locución y música "simple" se nos hacía algo pobre). Hacer click sobre la miniatura para acceder al vídeo.
 
-[![Alt text](https://img.youtube.com/vi/VVWFZUTXGC8/0.jpg)](https://www.youtube.com/watch?v=VVWFZUTXGC8)
+[![Vídeo Trailer](https://img.youtube.com/vi/VVWFZUTXGC8/0.jpg)](https://www.youtube.com/watch?v=VVWFZUTXGC8)
