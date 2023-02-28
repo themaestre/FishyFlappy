@@ -92,3 +92,31 @@ y el sistema de capas permite darle profundidad, puesto que el pez y el fondo es
 principal del móvil y dejando caer la aplicación, como el pez se mueve al centro del logo con más delay que el fondo.
 
 ![Aplicación en escritorio](./Screenshots/movil.jpg)
+
+## Progreso actual
+
+Los cambios pertinentes realizados en los [Sprites](./core/src/com/erdarkniel/fishyflappy/sprites) han sido:
+
+En la clase [Bottle](./core/src/com/erdarkniel/fishyflappy/sprites/Bottle.java) se ha minimizado el tamaño de las botellas debido a que, como veremos posteriormente, se ha cambiado la forma
+de juegos de los sprints anteriores, por lo que ahora tiene las medidas que veremos en las capturas de a continuación. Otro de los cambios que se ha realizado han sido agregar valores de
+gravedad a estos objetos. De esta manera la botella podrá subir y bajar por toda la pantalla. La forma en la que trabaja la gravedad lo podemos ver en el update de la misma clase, la cual actúa
+sobre la velocidad, la cual es la indicada de cambiar la posición.
+
+![Muestra de botellas](./Screenshots/bottle_size.png)
+
+Se ha añadido una nueva clase llamada [Cap](./core/src/com/erdarkniel/fishyflappy/sprites/Cap.java), esta tiene la misma función que las botellas. Por lo que el código es el mismo,
+el único cambio que existe a parte de la textura, es que de este solo es generado un objeto, como podemos observar en la imagen anterior.
+
+En cuanto a los [States](./core/src/com/erdarkniel/fishyflappy/states) los cambios han sido mayores, ya que el cambio más significativo ha sido cambiar todo el sistema de juego de manera que, ya no
+son botellas estáticas qye hay que pasar entre ellas estilo "Flappy Bird" sino que ahora estas botellas tienen movimiento a lo largo de toda la pantalla y por la cual tienes varios entrantes por donde
+esquivarlas, sin embargo, también tendrás que esquivar los tapones de botella que flotan a lo largo de la pantalla, siendo una dificultad añadida.
+
+En el [Game Over](./core/src/com/erdarkniel/fishyflappy/states/GameOver.java) se ha añadido una librería propia de LibGDX llamada "Preferences" la cual nos permite guardar variables u objetos
+sin que estos se pierdan aunque se cierre la aplicación. Esto nos ayuda bastante ya que así no es necesario crear una base de datos para tener solo el valor del highscore y actualizarlo,
+sino que con esta librería, se nos hace más sencillo. Este valor se muestra en pantalla a modo de record global del dispositivo y, si es superado, a su lado aparecerá una imagen de "New best" la
+cual indica que el record ha sido batido. Otro cambio que se ha realizado es la implementación del botón "PLay Again" para no tener que pasar por el menú si queremos
+volver a jugar.
+
+![Game Over Score inferior al Highcore](./Screenshots/gameover_scorenormal.png)
+
+![Game Over Score superior al Highcore](./Screenshots/gameover_newbest.png)

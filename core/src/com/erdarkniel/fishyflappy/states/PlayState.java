@@ -29,7 +29,6 @@ public class PlayState extends State{
     private Vector2 groundPos1,groundPos2;
     private Array<Bottle> bottles;
     private Array<Cap> caps;
-    //Pausa
     private boolean pause = false;
     private final int RESTARTXLEFT=(int)(Gdx.graphics.getWidth()*0.113);
     private final int RESTARTXRIGHT=(int)(Gdx.graphics.getWidth()*0.893);
