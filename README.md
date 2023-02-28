@@ -120,3 +120,24 @@ volver a jugar.
 ![Game Over Score inferior al Highcore](./Screenshots/gameover_scorenormal.png)
 
 ![Game Over Score superior al Highcore](./Screenshots/gameover_newbest.png)
+
+En cuanto al [PlayState](./core/src/com/erdarkniel/fishyflappy/states/PlayState.java) ha habido cambios muy significativos. Comenzaremos hablando sobre los cambios realizados sobre lo que ya había, y posteriormente
+hablaremos sobre las nuevas funcionalidades que hemos implementado. Sobre lo que teníamos, se ha cambiado el sistema de puntuaciones, ya que, anteriormente se realizó con unas hitboxs invisibles las cuales a la hora
+de chocar con ellas se sumaban los puntos, sin embargo, nos encontramos con el problema de que había veces que se duplicaba la puntuación por lo que no era exacta, así tras analizarlo,
+dimos con que la mejor forma de sumar los puntos sería mediante el tiempo, ya que al tener siempre la misma distancia las botellas, es muy sencillo el poder hacer la suma.
+Otro cambio significativo ha sido implementar el botón de pausa, el cual pausa el juego (que actuaría como hilo) y nos mostraría un menú en el cual podemos tanto volver a nuestra partida actual, como comenzar una nueva. Esto lo
+veremos en las capturas adyacentes.
+El cambio más brusco que podemos observar ha sido el cambio en la modalidad de juego, puesto que, como explique brevemente antes, ya no son botellas estáticas, sino móviles junto a sus tapones.
+Cabe destacar que en el [PlayState](./core/src/com/erdarkniel/fishyflappy/states/PlayState.java) se crean y se cambia su comportamiento. En el caso de las botellas, se crean 4 y en el de los tampones 5, para mayor dificulta y posiciones
+más randomizadas. El comportamiento de las mismas es controlado por sus gravedades, siendo estas cambiadas de valores positivos a negativos y viceversa en el update, para que, llegados a cierta altura, estas cambien. Podemos observar
+que los valores de cada una de las gravedades es distinto, esto fue realizado así para que el punto de colisión de las botellas no sea siempre en el centro, de esta manera, se le otorga mayor dificultad al juego.
+Otro cambio también fue que ya no puedes salir del mapa por la parte superior, simplemente se otorga un pequeño margen de salto por si se requiere hacer en el límite de la pantalla, y aprovechamos esto para comentar que, cuando el pez muere
+el móvil solo vibrará por las botellas o tapones al tocarlos, ya que es por la influencia de la causa humana, si, por el contrario el pez muere por choque contra el suelo o salida para el exterior, esto sería considerado como causa de muerte natural
+por lo que el móvil no vibrará (esta explicación es obviamente a modo conceptual, para que se entienda la idea de por qué decidimos que solo vibre al tocar el plástico).
+
+![In Game Footage](./Screenshots/ingame_footage.png)
+
+![In Game Footage Pause Sample](./Screenshots/pause_example.png)
+
+En cuanto a las texturas, se puede ver que algunas fueron reemplazadas ya que, los menús se parecían mucho a los botones entonces se decidieron cambiar. A su vez, también se hizo una prueba para evaluar el diseño de la aplicación (sprites creados todos por nosotros)
+y nos dió el siguiente resultado.
